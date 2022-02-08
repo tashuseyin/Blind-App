@@ -7,8 +7,11 @@ import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.myeyes.R
 import com.example.myeyes.databinding.ActivityBatteryBinding
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
 
 class BatteryActivity : AppCompatActivity() {
@@ -44,26 +47,30 @@ class BatteryActivity : AppCompatActivity() {
         val batteryLevel = batteryPct?.times(100)?.toInt()
         binding.percent.text = String.format("%s%s", batteryLevel.toString(), "%")
 
-        textToSpeech?.speak(
-            "your battery level is ${batteryLevel.toString()} percent}",
-            TextToSpeech.QUEUE_FLUSH,
-            null
-        )
-
         val statusBattery: Int = batteryStatus?.getIntExtra(BatteryManager.EXTRA_STATUS, -1) ?: -1
         val isCharging: Boolean = statusBattery == BatteryManager.BATTERY_STATUS_CHARGING
                 || statusBattery == BatteryManager.BATTERY_STATUS_FULL
 
-        if (isCharging) {
-            binding.status.text = "battery is charging"
+
+        lifecycleScope.launch {
+            delay(100)
             textToSpeech?.speak(
-                "and your device is charging", TextToSpeech.QUEUE_ADD, null
+                "your battery level is ${batteryLevel.toString()} percent}",
+                TextToSpeech.QUEUE_FLUSH,
+                null
             )
-        } else {
-            binding.status.text = "battery is not charging"
-            textToSpeech?.speak(
-                "and your device is not charging", TextToSpeech.QUEUE_ADD, null
-            )
+
+            if (isCharging) {
+                binding.status.text = "battery is charging"
+                textToSpeech?.speak(
+                    "and your device is charging", TextToSpeech.QUEUE_ADD, null
+                )
+            } else {
+                binding.status.text = "battery is not charging"
+                textToSpeech?.speak(
+                    "and your device is not charging", TextToSpeech.QUEUE_ADD, null
+                )
+            }
         }
 
         if (isCharging) {
