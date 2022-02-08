@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/battery_20.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/battery_60.xml" value="0.12552083333333333" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/battery_80.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/battery_90.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/battery_charging_20.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/battery_charging_30.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/battery_charging_60.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/battery_charging_80.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/battery_charging_full.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/battery_icon.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/call_icon.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/msg_icon.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/battery_20.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/bg_main.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/activity_battery.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/activity_main.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/activity_splash_screen.xml" value="0.38697916666666665" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
