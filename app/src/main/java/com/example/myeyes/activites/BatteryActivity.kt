@@ -8,18 +8,26 @@ import android.speech.tts.TextToSpeech
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.example.myeyes.R
-import com.example.myeyes.app.MyApp
 import com.example.myeyes.databinding.ActivityBatteryBinding
+import java.util.*
 
 class BatteryActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityBatteryBinding
+    private var textToSpeech: TextToSpeech? = null
 
+    private lateinit var binding: ActivityBatteryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBatteryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        textToSpeech = TextToSpeech(applicationContext) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                if (textToSpeech?.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
+                    textToSpeech?.language = Locale.US
+                }
+            }
+        }
         getBattery()
     }
 
@@ -36,7 +44,7 @@ class BatteryActivity : AppCompatActivity() {
         val batteryLevel = batteryPct?.times(100)?.toInt()
         binding.percent.text = String.format("%s%s", batteryLevel.toString(), "%")
 
-        ((applicationContext as MyApp)).textToSpeech?.speak(
+        textToSpeech?.speak(
             "your battery level is ${batteryLevel.toString()} percent}",
             TextToSpeech.QUEUE_FLUSH,
             null
@@ -48,12 +56,12 @@ class BatteryActivity : AppCompatActivity() {
 
         if (isCharging) {
             binding.status.text = "battery is charging"
-            ((applicationContext as MyApp)).textToSpeech?.speak(
+            textToSpeech?.speak(
                 "and your device is charging", TextToSpeech.QUEUE_ADD, null
             )
         } else {
             binding.status.text = "battery is not charging"
-            ((applicationContext as MyApp)).textToSpeech?.speak(
+            textToSpeech?.speak(
                 "and your device is not charging", TextToSpeech.QUEUE_ADD, null
             )
         }

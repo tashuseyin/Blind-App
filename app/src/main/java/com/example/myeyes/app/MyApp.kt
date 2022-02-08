@@ -4,5 +4,5 @@ import android.app.Application
 import android.speech.tts.TextToSpeech
 
 class MyApp : Application() {
-    var textToSpeech: TextToSpeech? = null
+    //var textToSpeech: TextToSpeech? = null
 }
