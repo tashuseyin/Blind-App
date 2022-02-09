@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.myeyes">
 
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
     <application
         android:name=".app.MyApp"
         android:allowBackup="true"
@@ -11,9 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/SplashScreen">
         <activity
+            android:name=".activites.CallActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activites.MessageActivity"
+            android:exported="false" />
+        <activity
             android:name=".activites.BatteryActivity"
             android:exported="true"
-            android:theme="@style/Theme.MyEyes"/>
+            android:theme="@style/Theme.MyEyes" />
         <activity
             android:name=".activites.MainActivity"
             android:exported="true"

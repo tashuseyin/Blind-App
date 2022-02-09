@@ -23,12 +23,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/call"
+            android:text="@string/object_detection"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:drawableTopCompat="@drawable/call_icon" />
+            app:drawableTopCompat="@drawable/eye" />
 
     </androidx.cardview.widget.CardView>
 
