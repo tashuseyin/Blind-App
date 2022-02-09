@@ -7,4 +7,7 @@
     <string name="your_device_is_charging">your device is charging</string>
     <string name="_100">100%</string>
     <string name="object_detection">Object Detection</string>
+    <string name="inbox">INBOX</string>
+    <string name="sent">SENT</string>
+    <string name="new_message">NEW MESSAGE</string>
 </resources>

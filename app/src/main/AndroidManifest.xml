@@ -18,10 +18,12 @@
         android:theme="@style/SplashScreen">
         <activity
             android:name=".activites.CallActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:theme="@style/Theme.MyEyes"/>
         <activity
             android:name=".activites.MessageActivity"
-            android:exported="false" />
+            android:exported="true"
+            android:theme="@style/Theme.MyEyes"/>
         <activity
             android:name=".activites.BatteryActivity"
             android:exported="true"

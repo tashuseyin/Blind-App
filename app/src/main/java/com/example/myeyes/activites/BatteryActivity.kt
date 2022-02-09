@@ -24,10 +24,11 @@ class BatteryActivity : AppCompatActivity() {
         binding = ActivityBatteryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val locale = Locale("tr", "TR")
         textToSpeech = TextToSpeech(applicationContext) { status ->
             if (status == TextToSpeech.SUCCESS) {
-                if (textToSpeech?.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
-                    textToSpeech?.language = Locale.US
+                if (textToSpeech?.isLanguageAvailable(locale) == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
+                    textToSpeech?.language = locale
                 }
             }
         }
@@ -55,20 +56,20 @@ class BatteryActivity : AppCompatActivity() {
         lifecycleScope.launch {
             delay(100)
             textToSpeech?.speak(
-                "your battery level is ${batteryLevel.toString()} percent}",
+                "pil seviyeniz yüzde ${batteryLevel.toString()}", // your battery level is ${batteryLevel.toString()} percent}
                 TextToSpeech.QUEUE_FLUSH,
                 null
             )
 
             if (isCharging) {
-                binding.status.text = "battery is charging"
+                binding.status.text = "pil şarj oluyor" // battery is charging
                 textToSpeech?.speak(
-                    "and your device is charging", TextToSpeech.QUEUE_ADD, null
+                    "ve cihazınız şarj oluyor", TextToSpeech.QUEUE_ADD, null // and your device is charging
                 )
             } else {
-                binding.status.text = "battery is not charging"
+                binding.status.text = "pil saj olmuyor" // battery is not charging
                 textToSpeech?.speak(
-                    "and your device is not charging", TextToSpeech.QUEUE_ADD, null
+                    "ve cihazınınz sarj omuyor.", TextToSpeech.QUEUE_ADD, null // and your device is not charging
                 )
             }
         }

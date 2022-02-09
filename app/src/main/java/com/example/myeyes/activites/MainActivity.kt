@@ -30,10 +30,10 @@ class MainActivity : AppCompatActivity() {
         textToSpeech = TextToSpeech(applicationContext) { status ->
             if (status == TextToSpeech.SUCCESS) {
                 val locale = Locale("tr", "TR")
-                if (textToSpeech?.isLanguageAvailable(Locale.US) == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
-                    textToSpeech?.language = Locale.US
+                if (textToSpeech?.isLanguageAvailable(locale) == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
+                    textToSpeech?.language = locale
                     textToSpeech?.speak(
-                        "Welcome to my eyes app, click on the different size of the screen to know details",
+                        "My Eyes uygulamasına hoş geldiniz, ayrıntıları öğrenmek için ekranın farklı boyutuna tıklayın", // Welcome to my eyes app, click on the different size of the screen to know details
                         TextToSpeech.QUEUE_FLUSH, null
                     )
                 }
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             battery.setOnClickListener(DoubleClick(object : DoubleClickListener {
                 override fun onSingleClick(view: View) {
                     textToSpeech?.speak(
-                        "you clicked battery, double click again to confirm",
+                        "pil özelliğini tıkladınız, onaylamak için tekrar çift tıklayın", // you clicked battery, double click again to confirm
                         TextToSpeech.QUEUE_FLUSH,
                         null
                     )
@@ -70,13 +70,13 @@ class MainActivity : AppCompatActivity() {
                 override fun onSingleClick(view: View) {
                     if (smsPermitted()) {
                         textToSpeech?.speak(
-                            "you clicked message, double click again to confirm",
+                            "mesaj özelliğini tıkladınız, onaylamak için tekrar çift tıklayın", //  you clicked message, double click again to confirm
                             TextToSpeech.QUEUE_FLUSH,
                             null
                         )
                     } else {
                         textToSpeech?.speak(
-                            "Give the necessary permission to use this feature.",
+                            "Bu özelliği kullanmak için gerekli izni verin", // Give the necessary permission to use this feature
                             TextToSpeech.QUEUE_FLUSH,
                             null
                         )
@@ -120,7 +120,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     if (report.isAnyPermissionPermanentlyDenied) {
                         textToSpeech!!.speak(
-                            "This app needs permission to use this feature. You can grant them in app settings.",
+                            "Bu uygulamanın bu özelliği kullanması için izne ihtiyacı var. Bunları uygulama ayarlarından verebilirsiniz.", // This app needs permission to use this feature. You can grant them in app settings.
                             TextToSpeech.QUEUE_FLUSH,
                             null
                         )
@@ -154,7 +154,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     if (report.isAnyPermissionPermanentlyDenied) {
                         textToSpeech!!.speak(
-                            "This app needs permission to use this feature. You can grant them in app settings.",
+                            "Bu uygulamanın bu özelliği kullanması için izne ihtiyacı var. Bunları uygulama ayarlarından verebilirsiniz",
                             TextToSpeech.QUEUE_FLUSH,
                             null
                         )

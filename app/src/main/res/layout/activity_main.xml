@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".activites.MainActivity">
 
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/object_detection"
         android:layout_width="0dp"
