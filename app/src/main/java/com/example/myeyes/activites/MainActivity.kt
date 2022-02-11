@@ -7,6 +7,7 @@ import android.speech.tts.TextToSpeech
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myeyes.R
+import com.example.myeyes.app.MyApp
 import com.example.myeyes.config.DoubleClick
 import com.example.myeyes.config.DoubleClickListener
 import com.example.myeyes.databinding.ActivityMainBinding
@@ -18,7 +19,6 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    private var textToSpeech: TextToSpeech? = null
 
     private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,12 +27,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-        textToSpeech = TextToSpeech(applicationContext) { status ->
+        (applicationContext as MyApp).textToSpeech = TextToSpeech(applicationContext) { status ->
             if (status == TextToSpeech.SUCCESS) {
                 val locale = Locale("tr", "TR")
-                if (textToSpeech?.isLanguageAvailable(locale) == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
-                    textToSpeech?.language = locale
-                    textToSpeech?.speak(
+                if ((applicationContext as MyApp).textToSpeech?.isLanguageAvailable(locale) == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
+                    (applicationContext as MyApp).textToSpeech?.language = locale
+                    (applicationContext as MyApp).textToSpeech?.speak(
                         "My Eyes uygulamasına hoş geldiniz, ayrıntıları öğrenmek için ekranın farklı boyutuna tıklayın", // Welcome to my eyes app, click on the different size of the screen to know details
                         TextToSpeech.QUEUE_FLUSH, null
                     )
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
             battery.setOnClickListener(DoubleClick(object : DoubleClickListener {
                 override fun onSingleClick(view: View) {
-                    textToSpeech?.speak(
+                    (applicationContext as MyApp).textToSpeech?.speak(
                         "pil özelliğini tıkladınız, onaylamak için tekrar çift tıklayın", // you clicked battery, double click again to confirm
                         TextToSpeech.QUEUE_FLUSH,
                         null
@@ -69,19 +69,20 @@ class MainActivity : AppCompatActivity() {
             message.setOnClickListener(DoubleClick(object : DoubleClickListener {
                 override fun onSingleClick(view: View) {
                     if (smsPermitted()) {
-                        textToSpeech?.speak(
+                        (applicationContext as MyApp).textToSpeech?.speak(
                             "mesaj özelliğini tıkladınız, onaylamak için tekrar çift tıklayın", //  you clicked message, double click again to confirm
                             TextToSpeech.QUEUE_FLUSH,
                             null
                         )
                     } else {
-                        textToSpeech?.speak(
+                        (applicationContext as MyApp).textToSpeech?.speak(
                             "Bu özelliği kullanmak için gerekli izni verin", // Give the necessary permission to use this feature
                             TextToSpeech.QUEUE_FLUSH,
                             null
                         )
                     }
                 }
+
                 override fun onDoubleClick(view: View) {
                     openSms()
                 }
@@ -93,7 +94,6 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
 
 
     private fun openSms() {
@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity() {
                         permitted = true
                     }
                     if (report.isAnyPermissionPermanentlyDenied) {
-                        textToSpeech!!.speak(
+                        (applicationContext as MyApp).textToSpeech?.speak(
                             "Bu uygulamanın bu özelliği kullanması için izne ihtiyacı var. Bunları uygulama ayarlarından verebilirsiniz.", // This app needs permission to use this feature. You can grant them in app settings.
                             TextToSpeech.QUEUE_FLUSH,
                             null
@@ -153,7 +153,7 @@ class MainActivity : AppCompatActivity() {
                         permitted = true
                     }
                     if (report.isAnyPermissionPermanentlyDenied) {
-                        textToSpeech!!.speak(
+                        (applicationContext as MyApp).textToSpeech?.speak(
                             "Bu uygulamanın bu özelliği kullanması için izne ihtiyacı var. Bunları uygulama ayarlarından verebilirsiniz",
                             TextToSpeech.QUEUE_FLUSH,
                             null
@@ -175,7 +175,7 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onDestroy() {
-        textToSpeech?.shutdown()
+        (applicationContext as MyApp).textToSpeech?.shutdown()
         super.onDestroy()
     }
 }

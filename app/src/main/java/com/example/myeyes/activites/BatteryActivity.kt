@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.myeyes.R
+import com.example.myeyes.app.MyApp
 import com.example.myeyes.databinding.ActivityBatteryBinding
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -16,19 +17,18 @@ import java.util.*
 
 class BatteryActivity : AppCompatActivity() {
 
-    private var textToSpeech: TextToSpeech? = null
-
     private lateinit var binding: ActivityBatteryBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBatteryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val locale = Locale("tr", "TR")
-        textToSpeech = TextToSpeech(applicationContext) { status ->
+        (applicationContext as MyApp).textToSpeech = TextToSpeech(applicationContext) { status ->
             if (status == TextToSpeech.SUCCESS) {
-                if (textToSpeech?.isLanguageAvailable(locale) == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
-                    textToSpeech?.language = locale
+                if ((applicationContext as MyApp).textToSpeech?.isLanguageAvailable(locale) == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
+                    (applicationContext as MyApp).textToSpeech?.language = locale
                 }
             }
         }
@@ -55,7 +55,7 @@ class BatteryActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             delay(100)
-            textToSpeech?.speak(
+            (applicationContext as MyApp).textToSpeech?.speak(
                 "pil seviyeniz yüzde ${batteryLevel.toString()}", // your battery level is ${batteryLevel.toString()} percent}
                 TextToSpeech.QUEUE_FLUSH,
                 null
@@ -63,12 +63,12 @@ class BatteryActivity : AppCompatActivity() {
 
             if (isCharging) {
                 binding.status.text = "pil şarj oluyor" // battery is charging
-                textToSpeech?.speak(
+                (applicationContext as MyApp).textToSpeech?.speak(
                     "ve cihazınız şarj oluyor", TextToSpeech.QUEUE_ADD, null // and your device is charging
                 )
             } else {
-                binding.status.text = "pil saj olmuyor" // battery is not charging
-                textToSpeech?.speak(
+                binding.status.text = "pil sarj olmuyor" // battery is not charging
+                (applicationContext as MyApp).textToSpeech?.speak(
                     "ve cihazınınz sarj omuyor.", TextToSpeech.QUEUE_ADD, null // and your device is not charging
                 )
             }

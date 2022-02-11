@@ -2,7 +2,6 @@
     <string name="app_name">MyEyes</string>
     <string name="my_eyes">My Eyes</string>
     <string name="call">Call</string>
-    <string name="message">Message</string>
     <string name="battery">Battery</string>
     <string name="your_device_is_charging">your device is charging</string>
     <string name="_100">100%</string>
