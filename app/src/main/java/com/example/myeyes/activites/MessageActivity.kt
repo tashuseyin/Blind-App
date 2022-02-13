@@ -19,27 +19,27 @@ class MessageActivity : AppCompatActivity() {
         val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
         binding.viewpager.adapter = adapter
 
-        TabLayoutMediator(binding.tablayout,binding.viewpager){tab,position->
-            when(position){
-                0->{
-                    tab.text="Inbox"
+        TabLayoutMediator(binding.tablayout, binding.viewpager) { tab, position ->
+            when (position) {
+                0 -> {
+                    tab.text = "Inbox"
                 }
-                1->{
-                    tab.text="Sent"
+                1 -> {
+                    tab.text = "Sent"
                 }
-                2->{
-                    tab.text="New Message"
+                2 -> {
+                    tab.text = "New Message"
                 }
             }
         }.attach()
 
     }
 
+
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
     }
-
 
 
 }

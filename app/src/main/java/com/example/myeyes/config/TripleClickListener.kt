@@ -2,8 +2,7 @@ package com.example.myeyes.config
 
 import android.view.View
 
-interface DoubleClickListener {
-
+interface TripleClickListener {
     /**
      * Called when the user make a single click.
      */
@@ -14,4 +13,5 @@ interface DoubleClickListener {
      */
     fun onDoubleClick(view: View)
 
+    fun onTripleClick(view: View)
 }

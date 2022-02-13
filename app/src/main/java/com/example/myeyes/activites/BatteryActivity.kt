@@ -62,14 +62,18 @@ class BatteryActivity : AppCompatActivity() {
             )
 
             if (isCharging) {
-                binding.status.text = "pil şarj oluyor" // battery is charging
+                binding.status.text = "cihazınız sarj oluyor." // battery is charging
                 (applicationContext as MyApp).textToSpeech?.speak(
-                    "ve cihazınız şarj oluyor", TextToSpeech.QUEUE_ADD, null // and your device is charging
+                    "ve cihazınız şarj oluyor",
+                    TextToSpeech.QUEUE_ADD,
+                    null // and your device is charging
                 )
             } else {
-                binding.status.text = "pil sarj olmuyor" // battery is not charging
+                binding.status.text = "cihazınız sarj olmuyor" // battery is not charging
                 (applicationContext as MyApp).textToSpeech?.speak(
-                    "ve cihazınınz sarj omuyor.", TextToSpeech.QUEUE_ADD, null // and your device is not charging
+                    "ve cihazınınz sarj omuyor.",
+                    TextToSpeech.QUEUE_ADD,
+                    null // and your device is not charging
                 )
             }
         }

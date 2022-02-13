@@ -3,16 +3,16 @@ package com.example.myeyes.config
 import android.os.Handler
 import android.view.View
 
-open class DoubleClick
+open class TripleClick
 /**
  * Builds a DoubleClick.
  *
- * @param doubleClickListener the click listener to notify clicks.
+ * @param tripleClickListener the click listener to notify clicks.
  */
     (/*
    * Click callback.
    */
-    private val doubleClickListener: DoubleClickListener
+    private val tripleClickListener: TripleClickListener
 ) : View.OnClickListener {
 
     /*
@@ -41,12 +41,16 @@ open class DoubleClick
 
             mHandler.postDelayed({
 
+                if (clicks == 3) {
+                    tripleClickListener.onTripleClick(view)
+                }
+
                 if (clicks == 2) {  // Double tap.
-                    doubleClickListener.onDoubleClick(view)
+                    tripleClickListener.onDoubleClick(view)
                 }
 
                 if (clicks == 1) {  // Single tap
-                    doubleClickListener.onSingleClick(view)
+                    tripleClickListener.onSingleClick(view)
                 }
 
                 // we need to  restore clicks count
@@ -66,3 +70,4 @@ open class DoubleClick
         private const val DOUBLE_CLICK_INTERVAL = 500L  // Time to wait the second click.
     }
 }
+
