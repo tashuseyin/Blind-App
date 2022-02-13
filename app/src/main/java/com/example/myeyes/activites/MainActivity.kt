@@ -4,18 +4,18 @@ import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.myeyes.R
 import com.example.myeyes.app.MyApp
-import com.example.myeyes.config.DoubleClick
-import com.example.myeyes.config.DoubleClickListener
 import com.example.myeyes.databinding.ActivityMainBinding
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -40,58 +40,45 @@ class MainActivity : AppCompatActivity() {
             }
         }
         setListener()
-        smsPermitted()
-        callPermitted()
+        appPermitted()
     }
 
     private fun setListener() {
         binding.apply {
 
-            battery.setOnClickListener(DoubleClick(object : DoubleClickListener {
-                override fun onSingleClick(view: View) {
+            battery.setOnClickListener {
+                (applicationContext as MyApp).textToSpeech?.speak(
+                    "pil özelliğini tıkladınız", // you clicked battery, double click again to confirm
+                    TextToSpeech.QUEUE_FLUSH,
+                    null
+                )
+                lifecycleScope.launch {
+                    delay(200)
+                    startActivity(Intent(this@MainActivity, BatteryActivity::class.java))
+                    overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+                }
+            }
+
+            message.setOnClickListener {
+                if (appPermitted()) {
                     (applicationContext as MyApp).textToSpeech?.speak(
-                        "pil özelliğini tıkladınız, onaylamak için tekrar çift tıklayın", // you clicked battery, double click again to confirm
+                        "mesaj özelliğini tıkladınız", //  you clicked message, double click again to confirm
+                        TextToSpeech.QUEUE_FLUSH,
+                        null
+                    )
+                    lifecycleScope.launch {
+                        delay(200)
+                        openSms()
+                    }
+                } else {
+                    (applicationContext as MyApp).textToSpeech?.speak(
+                        "Bu özelliği kullanmak için gerekli izni verin", // Give the necessary permission to use this feature
                         TextToSpeech.QUEUE_FLUSH,
                         null
                     )
                 }
 
-                override fun onDoubleClick(view: View) {
-                    startActivity(Intent(this@MainActivity, BatteryActivity::class.java))
-                    overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
-                }
-
-                override fun onTripleClick(view: View) {
-                    TODO("Not yet implemented")
-                }
-            }))
-
-            message.setOnClickListener(DoubleClick(object : DoubleClickListener {
-                override fun onSingleClick(view: View) {
-                    if (smsPermitted()) {
-                        (applicationContext as MyApp).textToSpeech?.speak(
-                            "mesaj özelliğini tıkladınız, onaylamak için tekrar çift tıklayın", //  you clicked message, double click again to confirm
-                            TextToSpeech.QUEUE_FLUSH,
-                            null
-                        )
-                    } else {
-                        (applicationContext as MyApp).textToSpeech?.speak(
-                            "Bu özelliği kullanmak için gerekli izni verin", // Give the necessary permission to use this feature
-                            TextToSpeech.QUEUE_FLUSH,
-                            null
-                        )
-                    }
-                }
-
-                override fun onDoubleClick(view: View) {
-                    openSms()
-                }
-
-                override fun onTripleClick(view: View) {
-                    TODO("Not yet implemented")
-                }
-            }))
-
+            }
         }
     }
 
@@ -106,43 +93,12 @@ class MainActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
     }
 
-    private fun smsPermitted(): Boolean {
+    private fun appPermitted(): Boolean {
         var permitted = false
         Dexter.withContext(this)
             .withPermissions(
                 Manifest.permission.READ_SMS,
-                Manifest.permission.SEND_SMS
-            )
-            .withListener(object : MultiplePermissionsListener {
-                override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
-                    if (report!!.areAllPermissionsGranted()) {
-                        permitted = true
-                    }
-                    if (report.isAnyPermissionPermanentlyDenied) {
-                        (applicationContext as MyApp).textToSpeech?.speak(
-                            "Bu uygulamanın bu özelliği kullanması için izne ihtiyacı var. Bunları uygulama ayarlarından verebilirsiniz.", // This app needs permission to use this feature. You can grant them in app settings.
-                            TextToSpeech.QUEUE_FLUSH,
-                            null
-                        )
-                    }
-                }
-
-                override fun onPermissionRationaleShouldBeShown(
-                    p0: MutableList<PermissionRequest>?,
-                    token: PermissionToken?
-                ) {
-                    token!!.continuePermissionRequest()
-                }
-            })
-            .onSameThread()
-            .check()
-        return permitted
-    }
-
-    private fun callPermitted(): Boolean {
-        var permitted = false
-        Dexter.withContext(this)
-            .withPermissions(
+                Manifest.permission.SEND_SMS,
                 Manifest.permission.CALL_PHONE,
                 Manifest.permission.READ_CALL_LOG,
                 Manifest.permission.READ_CONTACTS
@@ -154,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     if (report.isAnyPermissionPermanentlyDenied) {
                         (applicationContext as MyApp).textToSpeech?.speak(
-                            "Bu uygulamanın bu özelliği kullanması için izne ihtiyacı var. Bunları uygulama ayarlarından verebilirsiniz",
+                            "Bu uygulamanın bu özelliği kullanması için izne ihtiyacı var. Bunları uygulama ayarlarından verebilirsiniz.", // This app needs permission to use this feature. You can grant them in app settings.
                             TextToSpeech.QUEUE_FLUSH,
                             null
                         )
