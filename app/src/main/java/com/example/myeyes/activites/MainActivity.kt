@@ -107,7 +107,8 @@ class MainActivity : AppCompatActivity() {
                 Manifest.permission.SEND_SMS,
                 Manifest.permission.CALL_PHONE,
                 Manifest.permission.READ_CALL_LOG,
-                Manifest.permission.READ_CONTACTS
+                Manifest.permission.READ_CONTACTS,
+                Manifest.permission.RECEIVE_SMS
             )
             .withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport?) {

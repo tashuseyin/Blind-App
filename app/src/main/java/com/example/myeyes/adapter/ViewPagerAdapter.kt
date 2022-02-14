@@ -15,7 +15,7 @@ class ViewPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> InboxFragment()
+            0 -> Inbox()
             1 -> SentFragment()
             2 -> NewMessageFragment()
             else -> Fragment()

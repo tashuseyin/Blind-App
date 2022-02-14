@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myeyes.databinding.SmsCardviewBinding
 import com.example.myeyes.model.Sms
 
-class SmsAdapter(var dataList: List<Sms>, private val onItemClickListener: (Sms) -> Unit) :
+class SmsAdapter(private val onItemClickListener: (Sms) -> Unit) :
     RecyclerView.Adapter<SmsViewHolder>() {
+
+    var dataList = ArrayList<Sms>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SmsViewHolder {
         val binding = SmsCardviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -21,7 +23,7 @@ class SmsAdapter(var dataList: List<Sms>, private val onItemClickListener: (Sms)
 
     override fun getItemCount() = dataList.size
 
-    fun addItems(smsDat: List<Sms>) {
+    fun addItems(smsDat: ArrayList<Sms>) {
         dataList = smsDat
         notifyDataSetChanged()
     }
