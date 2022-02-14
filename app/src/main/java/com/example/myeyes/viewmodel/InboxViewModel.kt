@@ -21,6 +21,7 @@ class InboxViewModel(application: Application) : AndroidViewModel(application) {
     val isRefresh: MutableLiveData<Boolean> = MutableLiveData(false)
 
     fun loadSms() {
+        dataList.clear()
         isRefresh.value = false
         val cursor = context.contentResolver?.query(
             Telephony.Sms.Inbox.CONTENT_URI,
