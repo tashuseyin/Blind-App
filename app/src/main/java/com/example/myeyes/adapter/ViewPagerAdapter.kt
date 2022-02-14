@@ -5,7 +5,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.myeyes.fragmet.Inbox
-import com.example.myeyes.fragmet.InboxFragment
 import com.example.myeyes.fragmet.NewMessageFragment
 import com.example.myeyes.fragmet.SentFragment
 

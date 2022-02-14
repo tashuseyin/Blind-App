@@ -1,24 +1,25 @@
 package com.example.myeyes.fragmet
 
 import android.os.Bundle
-import android.provider.Telephony
 import android.speech.tts.TextToSpeech
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
+import androidx.fragment.app.viewModels
 import com.example.myeyes.adapter.SmsAdapter
 import com.example.myeyes.app.MyApp
 import com.example.myeyes.databinding.FragmentInboxBinding
 import com.example.myeyes.model.Sms
 import com.example.myeyes.util.Utils
+import com.example.myeyes.viewmodel.InboxViewModel
+import java.util.*
 
 class Inbox : Fragment() {
 
     private lateinit var adapter: SmsAdapter
-    private val smsLiveData: MutableLiveData<ArrayList<Sms>> = MutableLiveData(ArrayList())
+    private val inboxViewModel: InboxViewModel by viewModels()
     private var _binding: FragmentInboxBinding? = null
     private val binding get() = _binding!!
 
@@ -34,60 +35,45 @@ class Inbox : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        (activity?.applicationContext as MyApp).textToSpeech = TextToSpeech(activity?.applicationContext) { status ->
+            if (status == TextToSpeech.SUCCESS) {
+                val locale = Locale("tr", "TR")
+                if ((activity?.applicationContext as MyApp).textToSpeech?.isLanguageAvailable(locale) == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
+                    (activity?.applicationContext as MyApp).textToSpeech?.language = locale
+                    (activity?.applicationContext as MyApp).textToSpeech?.speak(
+                        "Son gelen mesajarı görebilmek için sayfayı yenileyin.",
+                        TextToSpeech.QUEUE_FLUSH, null
+                    )
+                }
+            }
+        }
 
         adapter = SmsAdapter { sms ->
             speakMessage(sms)
         }
-        setVisible()
         binding.recyclerview.adapter = adapter
-    }
 
-    private fun loadSms(): ArrayList<Sms> {
-        val dataList = ArrayList<Sms>()
-
-        val cursor = activity?.contentResolver?.query(
-            Telephony.Sms.Inbox.CONTENT_URI,
-            null,
-            null,
-            null,
-            Telephony.Sms.Inbox.DEFAULT_SORT_ORDER
-        )
-
-        cursor?.let { c ->
-            if (c.moveToFirst()) {
-                for (i in 1..c.count) {
-                    val smsData = Sms(
-                        c.getString(c.getColumnIndexOrThrow(Telephony.Sms.ADDRESS)),
-                        c.getString(c.getColumnIndexOrThrow(Telephony.Sms.BODY)),
-                        c.getString(c.getColumnIndexOrThrow(Telephony.Sms.DATE))
-                    )
-                    dataList.add(smsData)
-                    c.moveToNext()
-                }
+        inboxViewModel.apply {
+            loadSms()
+            isEmptyImage.observe(viewLifecycleOwner) {
+                binding.empty.isVisible = it
             }
-            c.close()
-        }
-        return dataList
-    }
-
-    private fun setVisible() {
-        val result = loadSms()
-        smsLiveData.value = result
-        if (result.isEmpty()) {
-            binding.progress.isVisible = false
-            binding.empty.isVisible = true
-            binding.recyclerview.isVisible = false
-        }
-        if (result.isNotEmpty()) {
-            binding.progress.isVisible = false
-            binding.empty.isVisible = false
-            smsLiveData.observe(viewLifecycleOwner) {
+            isRecyclerView.observe(viewLifecycleOwner) {
+                binding.recyclerview.isVisible = it
+            }
+            smsList.observe(viewLifecycleOwner) {
                 adapter.addItems(it)
             }
-            binding.recyclerview.isVisible = true
+
+            isRefresh.observe(viewLifecycleOwner) {
+                binding.refresh.isRefreshing = it
+            }
+
+            binding.refresh.setOnRefreshListener {
+                inboxViewModel.refreshData()
+            }
         }
     }
-
 
     private fun speakMessage(smsData: Sms) {
         ((activity?.applicationContext as MyApp)).textToSpeech?.speak(
@@ -99,7 +85,7 @@ class Inbox : Fragment() {
             "on ${Utils.convertLongToTime(smsData.date.toLong())}", TextToSpeech.QUEUE_ADD, null
         )
         ((activity?.applicationContext as MyApp)).textToSpeech?.speak(
-            smsData.body.lowercase(),
+            smsData.body,
             TextToSpeech.QUEUE_ADD,
             null
         )
