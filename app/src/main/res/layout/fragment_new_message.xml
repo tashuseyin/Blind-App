@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".fragmet.NewMessageFragment">
+    tools:context=".fragment.NewMessageFragment">
 
     <EditText
         android:id="@+id/number"

@@ -4,9 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.myeyes.fragmet.Inbox
-import com.example.myeyes.fragmet.NewMessageFragment
-import com.example.myeyes.fragmet.SentFragment
+import com.example.myeyes.fragment.Inbox
+import com.example.myeyes.fragment.NewMessageFragment
+import com.example.myeyes.fragment.SentFragment
 
 class SmsViewPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fm, lifecycle) {

@@ -7,6 +7,15 @@
     android:orientation="vertical"
     tools:context=".activites.BatteryActivity">
 
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/splash_bg"
+        app:titleTextColor="@color/white"
+        app:title="Battery"/>
+
     <TextView
         android:id="@+id/percent"
         android:layout_width="wrap_content"

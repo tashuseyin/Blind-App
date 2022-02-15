@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/backspace.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/battery_20.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/battery_60.xml" value="0.12552083333333333" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/battery_80.xml" value="0.403125" />
@@ -16,10 +17,12 @@
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/call_icon.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/empty_msg.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/msg_icon.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/backspace.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/battery_20.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/bg_main.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/call_icon.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/contacts_avatar.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/dial_bg.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/empty_msg.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/eye.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/no_data.xml" value="0.403125" />
@@ -31,6 +34,7 @@
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/activity_splash_screen.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/contacts_cardview.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/fragment_contact.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/fragment_dial_pad.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/fragment_inbox.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/fragment_inbox_contact_sent.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/fragment_new_message.xml" value="0.38697916666666665" />

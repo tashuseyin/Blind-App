@@ -1,4 +1,4 @@
-package com.example.myeyes.fragmet
+package com.example.myeyes.fragment
 
 import android.os.Bundle
 import android.speech.tts.TextToSpeech

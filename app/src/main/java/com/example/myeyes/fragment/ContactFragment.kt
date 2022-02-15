@@ -1,7 +1,6 @@
-package com.example.myeyes.fragmet
+package com.example.myeyes.fragment
 
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,9 +8,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.myeyes.adapter.ContactAdapter
-import com.example.myeyes.app.MyApp
 import com.example.myeyes.databinding.FragmentInboxContactSentBinding
 import com.example.myeyes.model.ContactUser
+import com.example.myeyes.util.Utils.textToSpeechFunctionBasic
 import com.example.myeyes.viewmodel.SharedViewModel
 
 class ContactFragment : Fragment() {
@@ -63,16 +62,8 @@ class ContactFragment : Fragment() {
             }
         }
     }
-
-
     private fun speakCall(contactUser: ContactUser) {
-        ((activity?.applicationContext as MyApp)).textToSpeech?.speak(
-            contactUser.user_title, TextToSpeech.QUEUE_FLUSH, null
-        )
-
-        ((activity?.applicationContext as MyApp)).textToSpeech?.speak(
-            contactUser.phone_number, TextToSpeech.QUEUE_ADD, null
-        )
+        textToSpeechFunctionBasic(requireActivity(), contactUser.user_title)
     }
 
     override fun onDestroyView() {
