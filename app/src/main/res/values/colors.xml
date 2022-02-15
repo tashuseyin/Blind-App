@@ -9,10 +9,10 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="splash_bg">#0A0D2C</color>
-    <color name="dark_gray">#202020</color>
-    <color name="medium_gray">#505050</color>
-    <color name="text_white">#eeeeee</color>
-    <color name="text_color">#fefefe</color>
-    <color name="item_bg">#222</color>
     <color name="colorGrey">#A0A0A0</color>
+    <color name="darkGrey">#808080</color>
+    <color name="colorBlue">#3333CC</color>
+    <color name="colorRed">#900000</color>
+    <color name="colorGreen">#339900</color>
+    <color name="colorPurple">#660066</color>
 </resources>

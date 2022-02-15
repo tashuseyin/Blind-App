@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.myeyes.adapter.SmsAdapter
 import com.example.myeyes.app.MyApp
-import com.example.myeyes.databinding.FragmentInboxBinding
+import com.example.myeyes.databinding.FragmentInboxContactSentBinding
 import com.example.myeyes.model.Sms
 import com.example.myeyes.util.Utils
 import com.example.myeyes.viewmodel.InboxViewModel
@@ -20,7 +20,7 @@ class Inbox : Fragment() {
 
     private lateinit var adapter: SmsAdapter
     private val inboxViewModel: InboxViewModel by viewModels()
-    private var _binding: FragmentInboxBinding? = null
+    private var _binding: FragmentInboxContactSentBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -28,25 +28,29 @@ class Inbox : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentInboxBinding.inflate(inflater, container, false)
+        _binding = FragmentInboxContactSentBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity?.applicationContext as MyApp).textToSpeech = TextToSpeech(activity?.applicationContext) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                val locale = Locale("tr", "TR")
-                if ((activity?.applicationContext as MyApp).textToSpeech?.isLanguageAvailable(locale) == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
-                    (activity?.applicationContext as MyApp).textToSpeech?.language = locale
-                    (activity?.applicationContext as MyApp).textToSpeech?.speak(
-                        "Son gelen mesajarı görebilmek için sayfayı yenileyin.",
-                        TextToSpeech.QUEUE_FLUSH, null
-                    )
+        (activity?.applicationContext as MyApp).textToSpeech =
+            TextToSpeech(activity?.applicationContext) { status ->
+                if (status == TextToSpeech.SUCCESS) {
+                    val locale = Locale("tr", "TR")
+                    if ((activity?.applicationContext as MyApp).textToSpeech?.isLanguageAvailable(
+                            locale
+                        ) == TextToSpeech.LANG_COUNTRY_AVAILABLE
+                    ) {
+                        (activity?.applicationContext as MyApp).textToSpeech?.language = locale
+                        (activity?.applicationContext as MyApp).textToSpeech?.speak(
+                            "Son gelen mesajarı görebilmek için sayfayı yenileyin.",
+                            TextToSpeech.QUEUE_FLUSH, null
+                        )
+                    }
                 }
             }
-        }
 
         adapter = SmsAdapter { sms ->
             speakMessage(sms)
@@ -93,6 +97,7 @@ class Inbox : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        (activity?.applicationContext as MyApp).textToSpeech?.stop()
         _binding = null
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myeyes.R
 import com.example.myeyes.adapter.SmsViewPagerAdapter
+import com.example.myeyes.app.MyApp
 import com.example.myeyes.databinding.ActivityMessageBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -41,5 +42,8 @@ class MessageActivity : AppCompatActivity() {
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
     }
 
-
+    override fun onDestroy() {
+        (applicationContext as MyApp).textToSpeech?.stop()
+        super.onDestroy()
+    }
 }

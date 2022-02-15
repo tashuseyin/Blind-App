@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.myeyes.app.MyApp
-import com.example.myeyes.databinding.FragmentSentBinding
+import com.example.myeyes.databinding.FragmentInboxContactSentBinding
 import com.example.myeyes.model.Sms
 import com.example.myeyes.util.Utils
 import kotlinx.coroutines.delay
@@ -19,14 +19,14 @@ import java.util.*
 class SentFragment : Fragment() {
 
 
-    private var _binding: FragmentSentBinding? = null
+    private var _binding: FragmentInboxContactSentBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSentBinding.inflate(inflater, container, false)
+        _binding = FragmentInboxContactSentBinding.inflate(inflater, container, false)
         return binding.root
     }
 

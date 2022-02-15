@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.example.myeyes.R
 import com.example.myeyes.adapter.CallViewPagerAdapter
 import com.example.myeyes.adapter.SmsViewPagerAdapter
+import com.example.myeyes.app.MyApp
 import com.example.myeyes.databinding.ActivityCallBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -26,9 +27,6 @@ class CallActivity : AppCompatActivity() {
                     tab.text = "Tuş Takımı"
                 }
                 1 -> {
-                    tab.text = "Arama geçmişi"
-                }
-                2 -> {
                     tab.text = "Rehber"
                 }
             }
@@ -38,5 +36,10 @@ class CallActivity : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)
+    }
+
+    override fun onDestroy() {
+        (applicationContext as MyApp).textToSpeech?.stop()
+        super.onDestroy()
     }
 }

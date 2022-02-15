@@ -19,16 +19,20 @@
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/battery_20.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/bg_main.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/call_icon.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/contacts_avatar.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/empty_msg.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/eye.xml" value="0.403125" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/no_data.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable/sms_bg.xml" value="0.39692307692307693" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/activity_battery.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/activity_call.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/activity_main.xml" value="0.38697916666666665" />
-        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/activity_message.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/activity_message.xml" value="0.33" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/activity_splash_screen.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/contacts_cardview.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/fragment_contact.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/fragment_inbox.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/fragment_inbox_contact_sent.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/fragment_new_message.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/fragment_sent.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/shimmer_row.xml" value="0.38697916666666665" />

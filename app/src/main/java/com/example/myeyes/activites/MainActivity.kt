@@ -26,19 +26,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        (applicationContext as MyApp).textToSpeech = TextToSpeech(applicationContext) { status ->
-            if (status == TextToSpeech.SUCCESS) {
-                val locale = Locale("tr", "TR")
-                if ((applicationContext as MyApp).textToSpeech?.isLanguageAvailable(locale) == TextToSpeech.LANG_COUNTRY_AVAILABLE) {
-                    (applicationContext as MyApp).textToSpeech?.language = locale
-                    (applicationContext as MyApp).textToSpeech?.speak(
-                        "My Eyes uygulamasına hoş geldiniz, ayrıntıları öğrenmek için ekranın farklı boyutuna tıklayın", // Welcome to my eyes app, click on the different size of the screen to know details
-                        TextToSpeech.QUEUE_FLUSH, null
-                    )
-                }
-            }
-        }
         setListener()
         appPermitted()
     }

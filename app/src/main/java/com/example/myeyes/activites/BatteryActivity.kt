@@ -56,20 +56,20 @@ class BatteryActivity : AppCompatActivity() {
         lifecycleScope.launch {
             delay(100)
             (applicationContext as MyApp).textToSpeech?.speak(
-                "pil seviyeniz yüzde ${batteryLevel.toString()}", // your battery level is ${batteryLevel.toString()} percent}
+                "pil seviyeniz yüzde ${batteryLevel.toString()}",
                 TextToSpeech.QUEUE_FLUSH,
                 null
             )
 
             if (isCharging) {
-                binding.status.text = "cihazınız sarj oluyor." // battery is charging
+                binding.status.text = getString(R.string.device_power)
                 (applicationContext as MyApp).textToSpeech?.speak(
                     "ve cihazınız şarj oluyor",
                     TextToSpeech.QUEUE_ADD,
                     null // and your device is charging
                 )
             } else {
-                binding.status.text = "cihazınız sarj olmuyor" // battery is not charging
+                binding.status.text = getString(R.string.device_not_power)
                 (applicationContext as MyApp).textToSpeech?.speak(
                     "ve cihazınınz sarj omuyor.",
                     TextToSpeech.QUEUE_ADD,
@@ -222,7 +222,10 @@ class BatteryActivity : AppCompatActivity() {
             }
 
         }
-
     }
 
+    override fun onDestroy() {
+        (applicationContext as MyApp).textToSpeech?.stop()
+        super.onDestroy()
+    }
 }

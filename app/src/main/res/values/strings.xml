@@ -11,7 +11,9 @@
     <string name="new_message">NEW MESSAGE</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="inbox_is_empty">Inbox is empty</string>
+    <string name="inbox_is_empty">No Data</string>
     <string name="to">To</string>
     <string name="message">Message</string>
+    <string name="device_power">cihazınız sarj oluyor</string>
+    <string name="device_not_power">cihazınız sarj olmuyor</string>
 </resources>
