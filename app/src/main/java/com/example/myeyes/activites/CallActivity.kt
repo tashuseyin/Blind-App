@@ -15,7 +15,7 @@ class CallActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCallBinding.inflate(layoutInflater)
-        binding.root
+        setContentView(binding.root)
 
         val adapter = CallViewPagerAdapter(supportFragmentManager, lifecycle)
         binding.callViewpager.adapter = adapter
