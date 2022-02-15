@@ -14,6 +14,8 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="SplashScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:statusBarColor">@color/splash_bg</item>
         <item name="android:windowBackground">@color/splash_bg</item>
