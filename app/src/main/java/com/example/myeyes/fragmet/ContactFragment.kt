@@ -36,8 +36,8 @@ class ContactFragment : Fragment() {
         adapter = ContactAdapter(requireContext()) { user ->
             speakCall(user)
         }
-        binding.recyclerview.adapter = adapter
 
+        binding.recyclerview.adapter = adapter
         observeViewModel()
     }
 
@@ -63,6 +63,7 @@ class ContactFragment : Fragment() {
             }
         }
     }
+
 
     private fun speakCall(contactUser: ContactUser) {
         ((activity?.applicationContext as MyApp)).textToSpeech?.speak(

@@ -30,5 +30,6 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="18sp" />
+
     </RelativeLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
