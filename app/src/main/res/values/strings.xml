@@ -16,4 +16,7 @@
     <string name="message">Message</string>
     <string name="device_power">cihazınız sarj oluyor</string>
     <string name="device_not_power">cihazınız sarj olmuyor</string>
+    <string name="message_listen_click">Mesajları dinlemek için mesaja tıklayınız</string>
+    <string name="inbox_start_text">gelen kutusu boş, gönderilen mesajı görmek için sola kaydırabilirsiniz</string>
+    <string name="message_content">"${smsData.address.lowercase()}" numaralı kişiden  "${Utils.convertLongToTime(smsData.date.toLong())}" tarihinde "${smsData.body}" mesaj gönderilmiştir</string>
 </resources>

@@ -32,4 +32,12 @@ object Utils {
                 }
             }
     }
+
+    fun textToSpeechFunctionBasic(activity: Activity, message: String){
+        (activity.applicationContext as MyApp).textToSpeech?.speak(
+            message,
+            TextToSpeech.QUEUE_FLUSH, null
+        )
+    }
+
 }

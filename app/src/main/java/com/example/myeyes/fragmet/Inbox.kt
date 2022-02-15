@@ -8,18 +8,19 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.example.myeyes.R
 import com.example.myeyes.adapter.SmsAdapter
 import com.example.myeyes.app.MyApp
 import com.example.myeyes.databinding.FragmentInboxContactSentBinding
 import com.example.myeyes.model.Sms
 import com.example.myeyes.util.Utils
-import com.example.myeyes.viewmodel.InboxViewModel
-import java.util.*
+import com.example.myeyes.util.Utils.textToSpeechFunctionBasic
+import com.example.myeyes.viewmodel.SharedViewModel
 
 class Inbox : Fragment() {
 
     private lateinit var adapter: SmsAdapter
-    private val inboxViewModel: InboxViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by viewModels()
     private var _binding: FragmentInboxContactSentBinding? = null
     private val binding get() = _binding!!
 
@@ -35,46 +36,44 @@ class Inbox : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (activity?.applicationContext as MyApp).textToSpeech =
-            TextToSpeech(activity?.applicationContext) { status ->
-                if (status == TextToSpeech.SUCCESS) {
-                    val locale = Locale("tr", "TR")
-                    if ((activity?.applicationContext as MyApp).textToSpeech?.isLanguageAvailable(
-                            locale
-                        ) == TextToSpeech.LANG_COUNTRY_AVAILABLE
-                    ) {
-                        (activity?.applicationContext as MyApp).textToSpeech?.language = locale
-                        (activity?.applicationContext as MyApp).textToSpeech?.speak(
-                            "Son gelen mesajarı görebilmek için sayfayı yenileyin.",
-                            TextToSpeech.QUEUE_FLUSH, null
-                        )
-                    }
-                }
-            }
-
         adapter = SmsAdapter { sms ->
             speakMessage(sms)
         }
         binding.recyclerview.adapter = adapter
 
-        inboxViewModel.apply {
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        sharedViewModel.apply {
             loadSms()
-            isEmptyImage.observe(viewLifecycleOwner) {
+            isSmsEmptyImage.observe(viewLifecycleOwner) {
                 binding.empty.isVisible = it
+                if (it) {
+                    textToSpeechFunctionBasic(
+                        requireActivity(),
+                        getString(R.string.inbox_start_text)
+                    )
+                } else {
+                    textToSpeechFunctionBasic(
+                        requireActivity(),
+                        getString(R.string.message_listen_click)
+                    )
+                }
             }
-            isRecyclerView.observe(viewLifecycleOwner) {
+            isSmsRecyclerView.observe(viewLifecycleOwner) {
                 binding.recyclerview.isVisible = it
             }
             smsList.observe(viewLifecycleOwner) {
                 adapter.addItems(it)
             }
 
-            isRefresh.observe(viewLifecycleOwner) {
+            isSmsRefresh.observe(viewLifecycleOwner) {
                 binding.refresh.isRefreshing = it
             }
 
             binding.refresh.setOnRefreshListener {
-                inboxViewModel.refreshData()
+                sharedViewModel.smsRefreshData()
             }
         }
     }

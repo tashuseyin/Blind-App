@@ -12,12 +12,12 @@ import com.example.myeyes.adapter.ContactAdapter
 import com.example.myeyes.app.MyApp
 import com.example.myeyes.databinding.FragmentInboxContactSentBinding
 import com.example.myeyes.model.ContactUser
-import com.example.myeyes.util.Utils
-import com.example.myeyes.viewmodel.ContactViewModel
+import com.example.myeyes.viewmodel.SharedViewModel
 
 class ContactFragment : Fragment() {
 
-    private val contactViewModel: ContactViewModel by viewModels()
+    private val sharedViewModel: SharedViewModel by viewModels()
+    private lateinit var adapter: ContactAdapter
 
     private var _binding: FragmentInboxContactSentBinding? = null
     private val binding get() = _binding!!
@@ -33,29 +33,33 @@ class ContactFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = ContactAdapter(requireContext()) { user ->
+        adapter = ContactAdapter(requireContext()) { user ->
             speakCall(user)
         }
         binding.recyclerview.adapter = adapter
 
-        contactViewModel.apply {
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        sharedViewModel.apply {
             contactListLoad()
-            isEmptyImage.observe(viewLifecycleOwner) {
+            isContactEmptyImage.observe(viewLifecycleOwner) {
                 binding.empty.isVisible = it
             }
-            isRecyclerView.observe(viewLifecycleOwner) {
+            isContactRecyclerView.observe(viewLifecycleOwner) {
                 binding.recyclerview.isVisible = it
             }
             contactList.observe(viewLifecycleOwner) {
                 adapter.addItems(it)
             }
 
-            isRefresh.observe(viewLifecycleOwner) {
+            isContactRefresh.observe(viewLifecycleOwner) {
                 binding.refresh.isRefreshing = it
             }
 
             binding.refresh.setOnRefreshListener {
-                refreshData()
+                contactRefreshData()
             }
         }
     }
