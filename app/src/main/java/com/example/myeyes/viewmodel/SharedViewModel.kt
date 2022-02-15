@@ -9,19 +9,22 @@ import androidx.lifecycle.MutableLiveData
 import com.example.myeyes.model.ContactUser
 import com.example.myeyes.model.Sms
 
-class SharedViewModel(application: Application): AndroidViewModel(application) {
+class SharedViewModel(application: Application) : AndroidViewModel(application) {
     private val context by lazy {
         application.applicationContext
     }
 
-    private var _smsList: MutableLiveData<ArrayList<Sms>> = MutableLiveData(ArrayList())
+    private var smsDataList = ArrayList<Sms>()
+    private var _smsList: MutableLiveData<ArrayList<Sms>> = MutableLiveData(smsDataList)
     val smsList = _smsList
 
     val isSmsRecyclerView: MutableLiveData<Boolean> = MutableLiveData(false)
     val isSmsEmptyImage: MutableLiveData<Boolean> = MutableLiveData(false)
     val isSmsRefresh: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    private var _contactList: MutableLiveData<ArrayList<ContactUser>> = MutableLiveData(ArrayList())
+    private var contactDataList = ArrayList<ContactUser>()
+    private var _contactList: MutableLiveData<ArrayList<ContactUser>> =
+        MutableLiveData(contactDataList)
     val contactList = _contactList
 
     val isContactRecyclerView: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -29,9 +32,8 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
     val isContactRefresh: MutableLiveData<Boolean> = MutableLiveData(false)
 
 
-
     fun loadSms() {
-        val smsDataList = ArrayList<Sms>()
+        smsDataList.clear()
         isSmsRefresh.value = false
         val cursor = context.contentResolver?.query(
             Telephony.Sms.Inbox.CONTENT_URI,
@@ -63,6 +65,7 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
         if (smsDataList.isNotEmpty()) {
             isSmsRecyclerView.value = true
             isSmsEmptyImage.value = false
+            usernameCheck()
         }
     }
 
@@ -73,7 +76,7 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
 
     @SuppressLint("Range")
     fun contactListLoad() {
-        val contactDataList = ArrayList<ContactUser>()
+        contactDataList.clear()
         isContactRefresh.value = false
 
         val FILTER = ContactsContract.Contacts.DISPLAY_NAME + " NOT LIKE '%@%'"
@@ -117,7 +120,7 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
                     if (!phone.isBlank()) {
                         contactDataList.add(ContactUser(id, name, phone))
                     }
-                }while (c.moveToNext())
+                } while (c.moveToNext())
                 c.close()
             }
         }
@@ -135,5 +138,16 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
     fun contactRefreshData() {
         isContactRefresh.value = true
         contactListLoad()
+    }
+
+    private fun usernameCheck() {
+        contactListLoad()
+        for (i in smsDataList) {
+            for (j in contactDataList) {
+                if (i.address == j.phone_number.replace(" ","")) {
+                    i.address = j.user_title
+                }
+            }
+        }
     }
 }
