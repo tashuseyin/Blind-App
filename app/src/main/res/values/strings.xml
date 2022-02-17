@@ -20,6 +20,19 @@
     <string name="inbox_start_text">gelen kutusu boş, gönderilen mesajı görmek için sola kaydırabilirsiniz</string>
     <string name="device_charching">ve cihazınız şarj oluyor</string>
     <string name="device_not_charching">ve cihazınınz sarj olmuyor</string>
+    <string name="backspace">backspace</string>
+    <string name="_1">1</string>
+    <string name="hash">#</string>
+    <string name="_0">0</string>
+    <string name="ast">*</string>
+    <string name="nine">9</string>
+    <string name="eight">8</string>
+    <string name="seven">7</string>
+    <string name="_5">5</string>
+    <string name="four">4</string>
+    <string name="_3">3</string>
+    <string name="two">2</string>
+    <string name="_6">6</string>
 
 
 </resources>
