@@ -82,7 +82,7 @@ class ContactFragment : Fragment() {
     private fun speakCall(contactUser: ContactUser) {
         textToSpeechFunctionBasic(
             requireActivity(),
-            "${contactUser.user_title} adli kişiye tıkladınız, aramak istiyorsanız çift tıklayın"
+            "${contactUser.user_title} adlı kişiye tıkladınız, aramak istiyorsanız çift tıklayın"
         )
     }
 

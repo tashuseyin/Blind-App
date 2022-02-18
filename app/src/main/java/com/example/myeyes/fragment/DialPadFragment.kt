@@ -103,7 +103,7 @@ class DialPadFragment : Fragment() {
     }
 
     private fun speak(digit: String) {
-        Utils.textToSpeechFunction(requireActivity(), "$digit tıklandı.")
+        Utils.textToSpeechFunctionBasic(requireActivity(), "$digit tıklandı.")
     }
 
     override fun onDestroyView() {

@@ -33,6 +33,11 @@
     <string name="_3">3</string>
     <string name="two">2</string>
     <string name="_6">6</string>
-
+    <string name="my_eyes_login">My Eyes uygulamasına hoş geldiniz, ayrıntıları öğrenmek için ekranın farklı boyutuna tıklayın</string>
+    <string name="battery_login">pil özelliğini tıkladınız, giriş yapmak için çift tıklayınız</string>
+    <string name="message_login">mesaj özelliğini tıkladınız, giriş yapmak için çift tıklayınız</string>
+    <string name="call_login">Arama özelliğini tıkladınız, giriş yapmak için çift tıklayınız</string>
+    <string name="permission_settings_message">Bu uygulamanın bu özelliği kullanması için izne ihtiyacı var.Bunları uygulama ayarlarından verebilirsiniz</string>
+    <string name="permission_error_message">Bu özelliği kullanmak için gerekli izinleri uygulama ayarlarından veriniz</string>
 
 </resources>

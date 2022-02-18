@@ -14,7 +14,7 @@ object Utils {
         return format.format(msgDate)
     }
 
-    fun textToSpeechFunction(activity:Activity, message: String) {
+    fun textToSpeechFunctionMain(activity: Activity, message: String) {
         (activity.applicationContext as MyApp).textToSpeech =
             TextToSpeech(activity.applicationContext) { status ->
                 if (status == TextToSpeech.SUCCESS) {
@@ -33,7 +33,7 @@ object Utils {
             }
     }
 
-    fun textToSpeechFunctionBasic(activity: Activity, message: String){
+    fun textToSpeechFunctionBasic(activity: Activity, message: String) {
         (activity.applicationContext as MyApp).textToSpeech?.speak(
             message,
             TextToSpeech.QUEUE_FLUSH, null

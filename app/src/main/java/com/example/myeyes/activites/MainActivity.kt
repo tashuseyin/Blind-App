@@ -3,7 +3,6 @@ package com.example.myeyes.activites
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myeyes.R
@@ -11,6 +10,7 @@ import com.example.myeyes.app.MyApp
 import com.example.myeyes.config.DoubleClick
 import com.example.myeyes.config.DoubleClickListener
 import com.example.myeyes.databinding.ActivityMainBinding
+import com.example.myeyes.util.Utils
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        Utils.textToSpeechFunctionMain(this, getString(R.string.my_eyes_login))
         setListener()
         appPermitted()
     }
@@ -34,14 +35,14 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             battery.setOnClickListener(DoubleClick(object : DoubleClickListener {
                 override fun onSingleClick(view: View) {
-                    (applicationContext as MyApp).textToSpeech?.speak(
-                        "pil özelliğini tıkladınız, giriş yapmak için çift tıklayınız.", // you clicked battery, double click again to confirm
-                        TextToSpeech.QUEUE_FLUSH,
-                        null
+                    Utils.textToSpeechFunctionBasic(
+                        this@MainActivity,
+                        getString(R.string.battery_login)
                     )
                 }
 
                 override fun onDoubleClick(view: View) {
+                    (applicationContext as MyApp).textToSpeech?.stop()
                     startActivity(Intent(this@MainActivity, BatteryActivity::class.java))
                     overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
                 }
@@ -49,22 +50,19 @@ class MainActivity : AppCompatActivity() {
 
             message.setOnClickListener(DoubleClick(object : DoubleClickListener {
                 override fun onSingleClick(view: View) {
-                    (applicationContext as MyApp).textToSpeech?.speak(
-                        "mesaj özelliğini tıkladınız, giriş yapmak için çift tıklayınız", //  you clicked message, double click again to confirm
-                        TextToSpeech.QUEUE_FLUSH,
-                        null
+                    Utils.textToSpeechFunctionBasic(
+                        this@MainActivity,
+                        getString(R.string.message_login)
                     )
-
                 }
 
                 override fun onDoubleClick(view: View) {
                     if (appPermitted()) {
                         openSms()
                     } else {
-                        (applicationContext as MyApp).textToSpeech?.speak(
-                            "Bu özelliği kullanmak için gerekli izinleri uygulama ayarlarından veriniz.", // Give the necessary permission to use this feature
-                            TextToSpeech.QUEUE_FLUSH,
-                            null
+                        Utils.textToSpeechFunctionBasic(
+                            this@MainActivity,
+                            getString(R.string.permission_error_message)
                         )
                     }
                 }
@@ -72,22 +70,19 @@ class MainActivity : AppCompatActivity() {
 
             call.setOnClickListener(DoubleClick(object : DoubleClickListener {
                 override fun onSingleClick(view: View) {
-                    (applicationContext as MyApp).textToSpeech?.speak(
-                        "Arama özelliğini tıkladınız, giriş yapmak için çift tıklayınız", //  you clicked message, double click again to confirm
-                        TextToSpeech.QUEUE_FLUSH,
-                        null
+                    Utils.textToSpeechFunctionBasic(
+                        this@MainActivity,
+                        getString(R.string.call_login)
                     )
-
                 }
 
                 override fun onDoubleClick(view: View) {
                     if (appPermitted()) {
                         openCall()
                     } else {
-                        (applicationContext as MyApp).textToSpeech?.speak(
-                            "Bu özelliği kullanmak için gerekli izinleri uygulama ayarlarından veriniz.", // Give the necessary permission to use this feature
-                            TextToSpeech.QUEUE_FLUSH,
-                            null
+                        Utils.textToSpeechFunctionBasic(
+                            this@MainActivity,
+                            getString(R.string.permission_error_message)
                         )
                     }
                 }
@@ -97,11 +92,13 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun openSms() {
+        (applicationContext as MyApp).textToSpeech?.stop()
         startActivity(Intent(this@MainActivity, MessageActivity::class.java))
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
     }
 
     private fun openCall() {
+        (applicationContext as MyApp).textToSpeech?.stop()
         startActivity(Intent(this@MainActivity, CallActivity::class.java))
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
     }
@@ -121,10 +118,9 @@ class MainActivity : AppCompatActivity() {
                         permitted = true
                     }
                     if (report.isAnyPermissionPermanentlyDenied) {
-                        (applicationContext as MyApp).textToSpeech?.speak(
-                            "Bu uygulamanın bu özelliği kullanması için izne ihtiyacı var. Bunları uygulama ayarlarından verebilirsiniz.", // This app needs permission to use this feature. You can grant them in app settings.
-                            TextToSpeech.QUEUE_FLUSH,
-                            null
+                        Utils.textToSpeechFunctionBasic(
+                            this@MainActivity,
+                            getString(R.string.permission_settings_message)
                         )
                     }
                 }
