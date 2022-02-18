@@ -18,23 +18,23 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
     private var _smsList: MutableLiveData<ArrayList<Sms>> = MutableLiveData(smsDataList)
     val smsList = _smsList
 
-    val isSmsRecyclerView: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isSmsEmptyImage: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isSmsRefresh: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isRecyclerView: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isEmptyImage: MutableLiveData<Boolean> = MutableLiveData(false)
+    val isRefresh: MutableLiveData<Boolean> = MutableLiveData(false)
 
     private var contactDataList = ArrayList<ContactUser>()
     private var _contactList: MutableLiveData<ArrayList<ContactUser>> =
         MutableLiveData(contactDataList)
     val contactList = _contactList
 
-    val isContactRecyclerView: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isContactEmptyImage: MutableLiveData<Boolean> = MutableLiveData(false)
-    val isContactRefresh: MutableLiveData<Boolean> = MutableLiveData(false)
+    private var sentSmsDataList = ArrayList<Sms>()
+    private var _sentSmsList: MutableLiveData<ArrayList<Sms>> = MutableLiveData(sentSmsDataList)
+    val sentSmsList = _sentSmsList
 
 
     fun loadSms() {
         smsDataList.clear()
-        isSmsRefresh.value = false
+        isRefresh.value = false
         val cursor = context.contentResolver?.query(
             Telephony.Sms.Inbox.CONTENT_URI,
             null,
@@ -59,25 +59,25 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         }
         _smsList.value = smsDataList
         if (smsDataList.isEmpty()) {
-            isSmsEmptyImage.value = true
-            isSmsRecyclerView.value = false
+            isEmptyImage.value = true
+            isRecyclerView.value = false
         }
         if (smsDataList.isNotEmpty()) {
-            isSmsRecyclerView.value = true
-            isSmsEmptyImage.value = false
+            isRecyclerView.value = true
+            isEmptyImage.value = false
             usernameCheck()
         }
     }
 
     fun smsRefreshData() {
-        isSmsRefresh.value = true
+        isRefresh.value = true
         loadSms()
     }
 
     @SuppressLint("Range")
     fun contactListLoad() {
         contactDataList.clear()
-        isContactRefresh.value = false
+        isRefresh.value = false
 
         val FILTER = ContactsContract.Contacts.DISPLAY_NAME + " NOT LIKE '%@%'"
         val ORDER = String.format("%1\$s COLLATE NOCASE", ContactsContract.Contacts.DISPLAY_NAME)
@@ -117,7 +117,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
                         }
                     }
 
-                    if (!phone.isBlank()) {
+                    if (phone.isNotBlank()) {
                         contactDataList.add(ContactUser(id, name, phone))
                     }
                 } while (c.moveToNext())
@@ -126,17 +126,17 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         }
         _contactList.value = contactDataList
         if (contactDataList.isEmpty()) {
-            isContactEmptyImage.value = true
-            isContactRecyclerView.value = false
+            isEmptyImage.value = true
+            isRecyclerView.value = false
         }
         if (contactDataList.isNotEmpty()) {
-            isContactRecyclerView.value = true
-            isContactEmptyImage.value = false
+            isRecyclerView.value = true
+            isEmptyImage.value = false
         }
     }
 
     fun contactRefreshData() {
-        isContactRefresh.value = true
+        isRefresh.value = true
         contactListLoad()
     }
 
@@ -144,10 +144,51 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         contactListLoad()
         for (i in smsDataList) {
             for (j in contactDataList) {
-                if (i.address == j.phone_number.replace(" ","")) {
+                if (i.address == j.phone_number.replace(" ", "")) {
                     i.address = j.user_title
                 }
             }
         }
+    }
+
+    fun sentMessage() {
+        sentSmsDataList.clear()
+        isRefresh.value = false
+        val cursor = context.contentResolver?.query(
+            Telephony.Sms.Sent.CONTENT_URI,
+            null,
+            null,
+            null,
+            Telephony.Sms.Inbox.DEFAULT_SORT_ORDER
+        )
+
+        cursor?.let { c ->
+            if (c.moveToFirst()) {
+                for (i in 1..c.count) {
+                    val smsData = Sms(
+                        c.getString(c.getColumnIndexOrThrow(Telephony.Sms.ADDRESS)),
+                        c.getString(c.getColumnIndexOrThrow(Telephony.Sms.BODY)),
+                        c.getString(c.getColumnIndexOrThrow(Telephony.Sms.DATE))
+                    )
+                    sentSmsDataList.add(smsData)
+                    c.moveToNext()
+                }
+            }
+            c.close()
+        }
+        _sentSmsList.value = sentSmsDataList
+        if (sentSmsDataList.isEmpty()) {
+            isEmptyImage.value = true
+            isRecyclerView.value = false
+        }
+        if (sentSmsDataList.isNotEmpty()) {
+            isRecyclerView.value = true
+            isEmptyImage.value = false
+        }
+    }
+
+    fun sentSmsRefreshData() {
+        isRefresh.value = true
+        sentMessage()
     }
 }

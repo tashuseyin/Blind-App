@@ -47,7 +47,7 @@ class Inbox : Fragment() {
     private fun observeViewModel() {
         sharedViewModel.apply {
             loadSms()
-            isSmsEmptyImage.observe(viewLifecycleOwner) {
+            isEmptyImage.observe(viewLifecycleOwner) {
                 binding.empty.isVisible = it
                 if (it) {
                     textToSpeechFunctionBasic(
@@ -61,14 +61,14 @@ class Inbox : Fragment() {
                     )
                 }
             }
-            isSmsRecyclerView.observe(viewLifecycleOwner) {
+            isRecyclerView.observe(viewLifecycleOwner) {
                 binding.recyclerview.isVisible = it
             }
             smsList.observe(viewLifecycleOwner) {
                 adapter.addItems(it)
             }
 
-            isSmsRefresh.observe(viewLifecycleOwner) {
+            isRefresh.observe(viewLifecycleOwner) {
                 binding.refresh.isRefreshing = it
             }
 
@@ -79,18 +79,9 @@ class Inbox : Fragment() {
     }
 
     private fun speakMessage(smsData: Sms) {
-        ((activity?.applicationContext as MyApp)).textToSpeech?.speak(
-            "message from ${smsData.address.lowercase()}",
-            TextToSpeech.QUEUE_FLUSH, null
-        )
-
-        ((activity?.applicationContext as MyApp)).textToSpeech?.speak(
-            "on ${Utils.convertLongToTime(smsData.date.toLong())}", TextToSpeech.QUEUE_ADD, null
-        )
-        ((activity?.applicationContext as MyApp)).textToSpeech?.speak(
-            smsData.body,
-            TextToSpeech.QUEUE_ADD,
-            null
+        textToSpeechFunctionBasic(
+            requireActivity(),
+            "message from ${smsData.address.lowercase()} on ${Utils.convertLongToTime(smsData.date.toLong())} ${smsData.body}"
         )
     }
 

@@ -5,16 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.myeyes.R
 import com.example.myeyes.adapter.SmsViewPagerAdapter
 import com.example.myeyes.app.MyApp
-import com.example.myeyes.databinding.ActivityMessageBinding
+import com.example.myeyes.databinding.ActivityMessageCallBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MessageActivity : AppCompatActivity() {
 
 
-    private lateinit var binding: ActivityMessageBinding
+    private lateinit var binding: ActivityMessageCallBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMessageBinding.inflate(layoutInflater)
+        binding = ActivityMessageCallBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val adapter = SmsViewPagerAdapter(supportFragmentManager, lifecycle)

@@ -1,27 +1,26 @@
 package com.example.myeyes.activites
 
 import android.os.Bundle
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myeyes.R
 import com.example.myeyes.adapter.CallViewPagerAdapter
 import com.example.myeyes.app.MyApp
-import com.example.myeyes.databinding.ActivityCallBinding
+import com.example.myeyes.databinding.ActivityMessageCallBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
 class CallActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityCallBinding
+    private lateinit var binding: ActivityMessageCallBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityCallBinding.inflate(layoutInflater)
+        binding = ActivityMessageCallBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val adapter = CallViewPagerAdapter(supportFragmentManager, lifecycle)
-        binding.callviewpager.adapter = adapter
+        binding.viewpager.adapter = adapter
 
-        TabLayoutMediator(binding.tablayout, binding.callviewpager) { tab, position ->
+        TabLayoutMediator(binding.tablayout, binding.viewpager) { tab, position ->
             when (position) {
                 0 -> {
                     tab.text = "Tuş Takımı"
