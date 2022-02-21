@@ -8,6 +8,7 @@ import com.example.myeyes.app.MyApp
 import com.example.myeyes.databinding.ActivityMessageCallBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
+
 class CallActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMessageCallBinding
@@ -30,6 +31,12 @@ class CallActivity : AppCompatActivity() {
                 }
             }
         }.attach()
+
+        val value = intent.getIntExtra("key",-1)
+        val bundle = Bundle()
+        bundle.putInt("key", value)
+        binding.viewpager.adapter = adapter
+        binding.viewpager.currentItem = value
     }
 
     override fun onBackPressed() {

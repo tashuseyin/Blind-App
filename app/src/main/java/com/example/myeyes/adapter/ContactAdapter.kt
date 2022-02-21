@@ -9,7 +9,7 @@ import com.example.myeyes.model.ContactUser
 
 class ContactAdapter(
     private val context: Context,
-    private val onItemClickListener: (ContactUser, Boolean) -> Unit
+    private val onItemClickListener: (ContactUser, Int) -> Unit
 ) : RecyclerView.Adapter<ContactViewHolder>() {
 
     var contactList: ArrayList<ContactUser> = ArrayList()

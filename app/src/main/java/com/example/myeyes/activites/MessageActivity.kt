@@ -6,7 +6,10 @@ import com.example.myeyes.R
 import com.example.myeyes.adapter.SmsViewPagerAdapter
 import com.example.myeyes.app.MyApp
 import com.example.myeyes.databinding.ActivityMessageCallBinding
+import com.example.myeyes.fragment.NewMessageFragment
+import com.example.myeyes.model.ContactUser
 import com.google.android.material.tabs.TabLayoutMediator
+
 
 class MessageActivity : AppCompatActivity() {
 
@@ -34,8 +37,18 @@ class MessageActivity : AppCompatActivity() {
             }
         }.attach()
 
+        userTransferNewMessageFragment()
     }
 
+    private fun userTransferNewMessageFragment(){
+        val intent = intent
+        val currentUser = intent.getParcelableExtra<ContactUser>("user")
+
+        val bundle = Bundle()
+        bundle.putParcelable("user", currentUser)
+        val fragmentMessage = NewMessageFragment()
+        fragmentMessage.arguments = bundle
+    }
 
     override fun onBackPressed() {
         super.onBackPressed()

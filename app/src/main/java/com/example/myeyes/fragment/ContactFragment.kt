@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.myeyes.activites.MessageActivity
 import com.example.myeyes.adapter.ContactAdapter
 import com.example.myeyes.databinding.FragmentInboxContactSentBinding
 import com.example.myeyes.model.ContactUser
@@ -38,18 +39,11 @@ class ContactFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ContactAdapter(requireContext()) { user, bool ->
-            if (!bool) {
-                speakCall(user)
-            } else {
-                textToSpeechFunctionBasic(requireActivity(), "${user.user_title} aranıyor")
-                lifecycleScope.launch {
-                    delay(1000)
-                    val callIntent = Intent(Intent.ACTION_CALL)
-                    callIntent.data = Uri.parse("tel:" + user.phone_number)
-                    ContextCompat.startActivity(requireContext(), callIntent, null)
-
-                }
+        adapter = ContactAdapter(requireContext()) { user, clickNumber ->
+            when (clickNumber) {
+                1 -> speakCall(user)
+                2 -> callUser(user)
+                3 -> userTransferMessageFragment(user)
             }
         }
         binding.recyclerview.adapter = adapter
@@ -82,8 +76,25 @@ class ContactFragment : Fragment() {
     private fun speakCall(contactUser: ContactUser) {
         textToSpeechFunctionBasic(
             requireActivity(),
-            "${contactUser.user_title} adlı kişiye tıkladınız, aramak istiyorsanız çift tıklayın"
+            "${contactUser.user_title} adlı kişiye tıkladınız, aramak istiyorsanız çift tıklayın, mesaj atmak istiyorsanız üç kere tıklayınız."
         )
+    }
+
+    private fun userTransferMessageFragment(user: ContactUser) {
+        val intent = Intent(activity, MessageActivity::class.java)
+        intent.putExtra("user", user)
+        startActivity(intent)
+    }
+
+    private fun callUser(user: ContactUser) {
+        textToSpeechFunctionBasic(requireActivity(), "${user.user_title} aranıyor")
+        lifecycleScope.launch {
+            delay(1000)
+            val callIntent = Intent(Intent.ACTION_CALL)
+            callIntent.data = Uri.parse("tel:" + user.phone_number)
+            ContextCompat.startActivity(requireContext(), callIntent, null)
+
+        }
     }
 
     override fun onDestroyView() {
