@@ -36,20 +36,7 @@ class MessageActivity : AppCompatActivity() {
                 }
             }
         }.attach()
-
-        userTransferNewMessageFragment()
     }
-
-    private fun userTransferNewMessageFragment(){
-        val intent = intent
-        val currentUser = intent.getParcelableExtra<ContactUser>("user")
-
-        val bundle = Bundle()
-        bundle.putParcelable("user", currentUser)
-        val fragmentMessage = NewMessageFragment()
-        fragmentMessage.arguments = bundle
-    }
-
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right)

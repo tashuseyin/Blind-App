@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.myeyes.activites.CallActivity
 import com.example.myeyes.databinding.FragmentNewMessageBinding
-import com.example.myeyes.model.ContactUser
 import com.example.myeyes.util.Utils
 
 
