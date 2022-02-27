@@ -1,31 +1,33 @@
-package com.example.myeyes.activites
+package com.example.myeyes.fragment
 
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
 import androidx.core.content.res.ResourcesCompat
+import androidx.viewbinding.ViewBinding
 import com.example.myeyes.R
 import com.example.myeyes.app.MyApp
-import com.example.myeyes.databinding.ActivityBatteryBinding
+import com.example.myeyes.bindingadapter.BindingFragment
+import com.example.myeyes.databinding.FragmentBatteryBinding
 import com.example.myeyes.util.Utils
-import java.util.*
 
-class BatteryActivity : AppCompatActivity() {
+class BatteryFragment : BindingFragment<FragmentBatteryBinding>() {
+    override val bindingInflater: (LayoutInflater) -> ViewBinding
+        get() = FragmentBatteryBinding::inflate
 
-    private lateinit var binding: ActivityBatteryBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityBatteryBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         getBattery()
     }
 
     private fun getBattery() {
         val intentFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
-        val batteryStatus = registerReceiver(null, intentFilter)
+        val batteryStatus = activity?.registerReceiver(null, intentFilter)
 
         val batteryPct: Float? = batteryStatus?.let { intent ->
             val level: Int = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
@@ -43,14 +45,14 @@ class BatteryActivity : AppCompatActivity() {
         if (isCharging) {
             binding.status.text = getString(R.string.device_power)
             Utils.textToSpeechFunctionBasic(
-                this@BatteryActivity,
-                "pil seviyeniz yüzde ${batteryLevel.toString()} ve cihazınız şarj oluyor"
+                requireActivity(),
+                getString(R.string.battery_charging_information, batteryLevel.toString())
             )
         } else {
             binding.status.text = getString(R.string.device_not_power)
             Utils.textToSpeechFunctionBasic(
-                this@BatteryActivity,
-                "pil seviyeniz yüzde ${batteryLevel.toString()} ve cihazınız şarj olmuyor"
+                requireActivity(),
+                getString(R.string.battery_not_charging_information, batteryLevel.toString())
             )
         }
 
@@ -201,8 +203,9 @@ class BatteryActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        (applicationContext as MyApp).textToSpeech?.stop()
-        super.onDestroy()
+    override fun onDestroyView() {
+        (activity?.applicationContext as MyApp).textToSpeech?.stop()
+        super.onDestroyView()
     }
 }
+

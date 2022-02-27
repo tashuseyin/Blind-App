@@ -6,9 +6,6 @@
     <string name="your_device_is_charging">your device is charging</string>
     <string name="_100">100%</string>
     <string name="object_detection">Object Detection</string>
-    <string name="inbox">INBOX</string>
-    <string name="sent">SENT</string>
-    <string name="new_message">NEW MESSAGE</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="inbox_is_empty">No Data</string>
@@ -33,6 +30,11 @@
     <string name="_3">3</string>
     <string name="two">2</string>
     <string name="_6">6</string>
+    <string name="inbox">Gelen Kutusu</string>
+    <string name="outbox">Giden Kutusu</string>
+    <string name="new_message">Yeni Mesaj</string>
+    <string name="contact">Rehber</string>
+    <string name="dial_pad">Tuş Takımı</string>
     <string name="my_eyes_login">My Eyes uygulamasına hoş geldiniz, ayrıntıları öğrenmek için ekranın farklı boyutuna tıklayın</string>
     <string name="battery_login">pil özelliğini tıkladınız, giriş yapmak için çift tıklayınız</string>
     <string name="message_login">mesaj özelliğini tıkladınız, giriş yapmak için çift tıklayınız</string>
@@ -40,5 +42,6 @@
     <string name="permission_settings_message">Bu uygulamanın bu özelliği kullanması için izne ihtiyacı var.Bunları uygulama ayarlarından verebilirsiniz</string>
     <string name="permission_error_message">Bu özelliği kullanmak için gerekli izinleri uygulama ayarlarından veriniz</string>
     <string name="object_detection_login">Nesne tespiti özelliğine tıkladınız, giriş yapmak için çift tıklayınız</string>
-
+    <string name="battery_charging_information">pil seviyeniz yüzde %1$s ve cihazınız şarj oluyor</string>
+    <string name="battery_not_charging_information">pil seviyeniz yüzde %1$s ve cihazınız şarj olmuyor</string>
 </resources>

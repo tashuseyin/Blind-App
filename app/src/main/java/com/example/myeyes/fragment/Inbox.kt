@@ -72,12 +72,12 @@ class Inbox : BindingFragment<FragmentInboxContactSentBinding>() {
     private fun speakMessage(smsData: Sms) {
         textToSpeechFunctionBasic(
             requireActivity(),
-            "message from ${smsData.address.lowercase()} on ${Utils.convertLongToTime(smsData.date.toLong())} ${smsData.body}"
+            "message from ${smsData.address.lowercase()} on ${Utils.convertLongToTime(smsData.date.toLong())} ${smsData.body.lowercase()}"
         )
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         (activity?.applicationContext as MyApp).textToSpeech?.stop()
+        super.onDestroyView()
     }
 }
