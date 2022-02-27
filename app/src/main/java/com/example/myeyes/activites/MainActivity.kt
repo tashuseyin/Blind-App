@@ -87,6 +87,20 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }))
+            objectDetection.setOnClickListener(DoubleClick(object : DoubleClickListener {
+                override fun onSingleClick(view: View) {
+                    Utils.textToSpeechFunctionBasic(
+                        this@MainActivity,
+                        getString(R.string.object_detection_login)
+                    )
+                }
+
+                override fun onDoubleClick(view: View) {
+                    (applicationContext as MyApp).textToSpeech?.stop()
+                    startActivity(Intent(this@MainActivity, ObjectDetectionActivity::class.java))
+                    overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left)
+                }
+            }))
         }
     }
 

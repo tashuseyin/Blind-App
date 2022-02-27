@@ -16,13 +16,17 @@
         android:supportsRtl="true"
         android:theme="@style/SplashScreen">
         <activity
+            android:name=".activites.ObjectDetectionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.MyEyes"/>
+        <activity
             android:name=".activites.CallActivity"
             android:exported="true"
-            android:theme="@style/Theme.MyEyes"/>
+            android:theme="@style/Theme.MyEyes" />
         <activity
             android:name=".activites.MessageActivity"
             android:exported="true"
-            android:theme="@style/Theme.MyEyes"/>
+            android:theme="@style/Theme.MyEyes" />
         <activity
             android:name=".activites.BatteryActivity"
             android:exported="true"

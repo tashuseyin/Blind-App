@@ -6,24 +6,17 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
+import androidx.viewbinding.ViewBinding
+import com.example.myeyes.bindingadapter.BindingFragment
 import com.example.myeyes.databinding.FragmentDialPadBinding
 import com.example.myeyes.util.Utils
 
-class DialPadFragment : Fragment() {
+class DialPadFragment : BindingFragment<FragmentDialPadBinding>() {
 
-    private var _binding: FragmentDialPadBinding? = null
-    private val binding get() = _binding!!
+    override val bindingInflater: (LayoutInflater) -> ViewBinding
+        get() = FragmentDialPadBinding::inflate
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDialPadBinding.inflate(inflater, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -104,11 +97,6 @@ class DialPadFragment : Fragment() {
 
     private fun speak(digit: String) {
         Utils.textToSpeechFunctionBasic(requireActivity(), "$digit tıklandı.")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     private var numberWatcher = object : TextWatcher {

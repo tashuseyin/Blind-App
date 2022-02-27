@@ -39,5 +39,6 @@
     <string name="call_login">Arama özelliğini tıkladınız, giriş yapmak için çift tıklayınız</string>
     <string name="permission_settings_message">Bu uygulamanın bu özelliği kullanması için izne ihtiyacı var.Bunları uygulama ayarlarından verebilirsiniz</string>
     <string name="permission_error_message">Bu özelliği kullanmak için gerekli izinleri uygulama ayarlarından veriniz</string>
+    <string name="object_detection_login">Nesne tespiti özelliğine tıkladınız, giriş yapmak için çift tıklayınız</string>
 
 </resources>

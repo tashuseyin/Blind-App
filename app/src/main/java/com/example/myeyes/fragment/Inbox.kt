@@ -1,37 +1,28 @@
 package com.example.myeyes.fragment
 
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.viewbinding.ViewBinding
 import com.example.myeyes.R
 import com.example.myeyes.adapter.SmsAdapter
 import com.example.myeyes.app.MyApp
+import com.example.myeyes.bindingadapter.BindingFragment
 import com.example.myeyes.databinding.FragmentInboxContactSentBinding
 import com.example.myeyes.model.Sms
 import com.example.myeyes.util.Utils
 import com.example.myeyes.util.Utils.textToSpeechFunctionBasic
 import com.example.myeyes.viewmodel.SharedViewModel
 
-class Inbox : Fragment() {
+class Inbox : BindingFragment<FragmentInboxContactSentBinding>() {
 
     private lateinit var adapter: SmsAdapter
     private val sharedViewModel: SharedViewModel by viewModels()
-    private var _binding: FragmentInboxContactSentBinding? = null
-    private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentInboxContactSentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override val bindingInflater: (LayoutInflater) -> ViewBinding
+        get() = FragmentInboxContactSentBinding::inflate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -88,6 +79,5 @@ class Inbox : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         (activity?.applicationContext as MyApp).textToSpeech?.stop()
-        _binding = null
     }
 }

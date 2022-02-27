@@ -5,13 +5,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.viewbinding.ViewBinding
 import com.example.myeyes.adapter.ContactAdapter
+import com.example.myeyes.bindingadapter.BindingFragment
 import com.example.myeyes.databinding.FragmentInboxContactSentBinding
 import com.example.myeyes.model.ContactUser
 import com.example.myeyes.util.Utils.textToSpeechFunctionBasic
@@ -19,21 +19,13 @@ import com.example.myeyes.viewmodel.SharedViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class ContactFragment : Fragment() {
+class ContactFragment : BindingFragment<FragmentInboxContactSentBinding>() {
 
     private val sharedViewModel: SharedViewModel by viewModels()
     private lateinit var adapter: ContactAdapter
 
-    private var _binding: FragmentInboxContactSentBinding? = null
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentInboxContactSentBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    override val bindingInflater: (LayoutInflater) -> ViewBinding
+        get() = FragmentInboxContactSentBinding::inflate
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -75,7 +67,7 @@ class ContactFragment : Fragment() {
     private fun speakCall(contactUser: ContactUser) {
         textToSpeechFunctionBasic(
             requireActivity(),
-            "${contactUser.user_title} adlı kişiye tıkladınız, aramak istiyorsanız çift tıklayın, mesaj atmak istiyorsanız üç kere tıklayınız."
+            "${contactUser.user_title} adlı kişiye tıkladınız, aramak istiyorsanız çift tıklayın."
         )
     }
 
@@ -88,10 +80,5 @@ class ContactFragment : Fragment() {
             ContextCompat.startActivity(requireContext(), callIntent, null)
 
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
