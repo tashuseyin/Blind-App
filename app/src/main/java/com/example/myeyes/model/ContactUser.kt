@@ -1,11 +1,12 @@
 package com.example.myeyes.model
 
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Parcelize
+@Entity
 data class ContactUser(
-    val id: String,
     val user_title: String,
+    @PrimaryKey
+    val uid: String,
     val phone_number: String
-): Parcelable
+)

@@ -1,6 +1,5 @@
 package com.example.myeyes.fragment
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -8,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.viewbinding.ViewBinding
+import com.example.myeyes.R
 import com.example.myeyes.bindingadapter.BindingFragment
 import com.example.myeyes.databinding.FragmentDialPadBinding
 import com.example.myeyes.util.Utils
@@ -20,7 +20,7 @@ class DialPadFragment : BindingFragment<FragmentDialPadBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        welcomeSpeak()
         binding.number.addTextChangedListener(numberWatcher)
         setListener()
     }
@@ -76,27 +76,43 @@ class DialPadFragment : BindingFragment<FragmentDialPadBinding>() {
                 speak("#")
                 displayNumber("#")
             }
-            backspace.setOnClickListener {
-                Utils.textToSpeechFunctionBasic(requireActivity(), "${number.text.last()} silindi")
+            backButton.setOnClickListener {
+                Utils.textToSpeechFunctionBasic(requireActivity(), "${number.text.last()} silindi.")
+
                 if (number.length() == 1) {
                     number.text = null
-                    Utils.textToSpeechFunctionBasic(requireActivity(), "numara yok")
+                    Utils.textToSpeechFunctionBasic(requireActivity(), "Telefon numarası boş")
                 } else {
-                    val newNumber = number.text.subSequence(0, binding.number.length() - 1)
+                    val newNumber = number.text.subSequence(0, number.length() - 1)
                     number.setText(newNumber)
                 }
+            }
+            backButton.setOnLongClickListener {
+                number.text = null
+                Utils.textToSpeechFunctionBasic(
+                    requireActivity(),
+                    "Telefon numarası tamamen silindi"
+                )
+                true
             }
         }
     }
 
-    @SuppressLint("SetTextI18n")
+
     private fun displayNumber(no: String) {
         val str = binding.number.text
-        binding.number.setText(" $str$no")
+        binding.number.setText("$str$no")
+    }
+
+    private fun welcomeSpeak() {
+        Utils.textToSpeechFunctionBasic(
+            requireActivity(),
+            getString(R.string.dial_pad_welcome_speak)
+        )
     }
 
     private fun speak(digit: String) {
-        Utils.textToSpeechFunctionBasic(requireActivity(), "$digit tıklandı.")
+        Utils.textToSpeechFunctionBasic(requireActivity(), getString(R.string.digit, digit))
     }
 
     private var numberWatcher = object : TextWatcher {
@@ -105,9 +121,9 @@ class DialPadFragment : BindingFragment<FragmentDialPadBinding>() {
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             if (p0 == null) {
-                binding.backspace.isVisible = false
+                binding.backButton.isVisible = false
             } else {
-                binding.backspace.isVisible = !(p0.isEmpty() || p0.isBlank())
+                binding.backButton.isVisible = !(p0.isEmpty() || p0.isBlank())
             }
         }
 

@@ -18,9 +18,6 @@ class MainCallFragment : BindingFragment<FragmentMainCallBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.toolbar.title = getString(R.string.call)
-        binding.toolbar.setTitleTextColor(Color.WHITE)
-
         val adapter = CallViewPagerAdapter(requireActivity().supportFragmentManager, lifecycle)
         binding.viewpager.adapter = adapter
 

@@ -22,9 +22,6 @@ class BatteryFragment : BindingFragment<FragmentBatteryBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.toolbar.title = getString(R.string.battery)
-        binding.toolbar.setTitleTextColor(Color.WHITE)
         getBattery()
     }
 

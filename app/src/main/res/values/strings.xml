@@ -18,6 +18,8 @@
     <string name="device_charching">ve cihazınız şarj oluyor</string>
     <string name="device_not_charching">ve cihazınınz sarj olmuyor</string>
     <string name="backspace">backspace</string>
+    <string name="digit">%1$s tıklandı</string>
+    <string name="dial_pad_welcome_speak">Aramak istediğiniz kişinin numarasını tıklayınız.Rehberde var olan birini aramak istiyorsanız ekranı yana kaydırın.</string>
     <string name="_1">1</string>
     <string name="hash">#</string>
     <string name="_0">0</string>

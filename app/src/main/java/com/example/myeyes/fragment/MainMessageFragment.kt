@@ -1,6 +1,5 @@
 package com.example.myeyes.fragment
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,10 +19,6 @@ class MainMessageFragment : BindingFragment<FragmentMainMessageBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.toolbar.title = getString(R.string.message)
-        binding.toolbar.setTitleTextColor(Color.WHITE)
-
         val adapter = SmsViewPagerAdapter(requireActivity().supportFragmentManager, lifecycle)
         binding.viewpager.adapter = adapter
         TabLayoutMediator(binding.tablayout, binding.viewpager) { tab, position ->
