@@ -16,9 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/SplashScreen">
         <activity
+            android:name=".activites.OptionsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_options"
+            android:theme="@style/SplashScreen.NoActionBar" />
+        <activity
             android:name=".activites.ObjectDetectionActivity"
             android:exported="false"
-            android:theme="@style/Theme.MyEyes"/>
+            android:theme="@style/Theme.MyEyes" />
         <activity
             android:name=".activites.CallActivity"
             android:exported="true"

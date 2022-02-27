@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
+import com.example.myeyes.R
 import com.example.myeyes.adapter.ContactAdapter
 import com.example.myeyes.bindingadapter.BindingFragment
 import com.example.myeyes.databinding.FragmentInboxContactSentBinding
@@ -50,7 +51,7 @@ class ContactFragment : BindingFragment<FragmentInboxContactSentBinding>() {
             isRecyclerView.observe(viewLifecycleOwner) {
                 binding.recyclerview.isVisible = it
             }
-            contactList.observe(viewLifecycleOwner) {
+            contactList?.observe(viewLifecycleOwner) {
                 adapter.addItems(it)
             }
 
@@ -67,12 +68,12 @@ class ContactFragment : BindingFragment<FragmentInboxContactSentBinding>() {
     private fun speakCall(contactUser: ContactUser) {
         textToSpeechFunctionBasic(
             requireActivity(),
-            "${contactUser.user_title} adlı kişiye tıkladınız, aramak istiyorsanız çift tıklayın."
+            getString(R.string.user_call_speak, contactUser.user_title)
         )
     }
 
     private fun callUser(user: ContactUser) {
-        textToSpeechFunctionBasic(requireActivity(), "${user.user_title} aranıyor")
+        textToSpeechFunctionBasic(requireActivity(), getString(R.string.call_user, user.user_title))
         lifecycleScope.launch {
             delay(1000)
             val callIntent = Intent(Intent.ACTION_CALL)

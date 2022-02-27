@@ -12,7 +12,7 @@ class ContactAdapter(
     private val onItemClickListener: (ContactUser, Int) -> Unit
 ) : RecyclerView.Adapter<ContactViewHolder>() {
 
-    var contactList: ArrayList<ContactUser> = ArrayList()
+    var contactList: List<ContactUser> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         val binding =
@@ -26,7 +26,7 @@ class ContactAdapter(
 
     override fun getItemCount() = contactList.size
 
-    fun addItems(smsDat: ArrayList<ContactUser>) {
+    fun addItems(smsDat: List<ContactUser>) {
         contactList = smsDat
         notifyDataSetChanged()
     }

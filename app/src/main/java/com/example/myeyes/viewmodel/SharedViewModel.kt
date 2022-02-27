@@ -5,11 +5,19 @@ import android.app.Application
 import android.provider.ContactsContract
 import android.provider.Telephony
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.example.myeyes.db.ContactRepository
 import com.example.myeyes.model.ContactUser
 import com.example.myeyes.model.Sms
+import kotlinx.coroutines.launch
 
-class SharedViewModel(application: Application) : AndroidViewModel(application) {
+class SharedViewModel(application: Application) :
+    AndroidViewModel(application) {
+
+    private val repository = ContactRepository
+
     private val context by lazy {
         application.applicationContext
     }
@@ -23,8 +31,7 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
     val isRefresh: MutableLiveData<Boolean> = MutableLiveData(false)
 
     private var contactDataList = ArrayList<ContactUser>()
-    private var _contactList: MutableLiveData<ArrayList<ContactUser>> =
-        MutableLiveData(contactDataList)
+    private var _contactList: LiveData<List<ContactUser>>? = getContactUser()
     val contactList = _contactList
 
     private var sentSmsDataList = ArrayList<Sms>()
@@ -119,12 +126,14 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
 
                     if (phone.isNotBlank()) {
                         contactDataList.add(ContactUser(id, name, phone))
+                        viewModelScope.launch {
+                            insert(ContactUser(id, name, phone.replace(" ","")))
+                        }
                     }
                 } while (c.moveToNext())
                 c.close()
             }
         }
-        _contactList.value = contactDataList
         if (contactDataList.isEmpty()) {
             isEmptyImage.value = true
             isRecyclerView.value = false
@@ -139,6 +148,15 @@ class SharedViewModel(application: Application) : AndroidViewModel(application) 
         isRefresh.value = true
         contactListLoad()
     }
+
+    suspend fun insert(contactUser: ContactUser) {
+        repository.insert(contactUser)
+    }
+
+    fun getContactUser() = repository.getContactUser()
+
+    fun searchPhoneNumberDatabase(searchNumber: String) = repository.searchPhoneNumber(searchNumber)
+
 
     private fun usernameCheck() {
         contactListLoad()

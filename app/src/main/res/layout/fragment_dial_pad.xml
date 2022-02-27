@@ -1,222 +1,209 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_weight="9"
     android:orientation="vertical"
     tools:context="fragment.DialPadFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="4"
+        android:layout_height="0dp"
         android:background="@drawable/dial_bg"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <EditText
+        android:id="@+id/number"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_height="70dp"
+        android:background="@drawable/dial_bg"
+        android:focusableInTouchMode="false"
+        android:inputType="number"
+        android:paddingStart="20dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="60dp"
+        android:paddingBottom="10dp"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/grid_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <EditText
-            android:id="@+id/number"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/dial_bg"
-            android:focusableInTouchMode="false"
-            android:inputType="number"
-            android:paddingEnd="60dp"
-            android:paddingStart="20dp"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/back_button"
+        android:layout_width="40dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="10dp"
+        android:src="@drawable/backspace"
+        app:layout_constraintBottom_toBottomOf="@+id/number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/number" />
 
-        <ImageView
-            android:id="@+id/back_button"
-            android:layout_width="40dp"
-            android:layout_height="60dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/backspace"
-            app:layout_constraintBottom_toBottomOf="@+id/number"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/number" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <GridLayout
+        android:id="@+id/grid_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="4">
+        android:layout_height="300dp"
+        android:background="@drawable/dial_bg"
+        android:columnCount="3"
+        android:rowCount="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <GridLayout
-            android:id="@+id/grid_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/dial_bg"
-            android:columnCount="3"
-            android:rowCount="4"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <Button
+            android:id="@+id/one"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/sms_bg"
+            android:text="@string/_1"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
 
-            <Button
-                android:id="@+id/one"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="3dp"
-                android:background="@drawable/sms_bg"
-                android:text="@string/_1"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
+        <Button
+            android:id="@+id/two"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/sms_bg"
+            android:text="@string/two"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
 
-            <Button
-                android:id="@+id/two"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="3dp"
-                android:background="@drawable/sms_bg"
-                android:text="@string/two"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
+        <Button
+            android:id="@+id/three"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/sms_bg"
+            android:text="@string/_3"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
 
-            <Button
-                android:id="@+id/three"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="3dp"
-                android:background="@drawable/sms_bg"
-                android:text="@string/_3"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
+        <Button
+            android:id="@+id/four"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/sms_bg"
+            android:text="@string/four"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
 
-            <Button
-                android:id="@+id/four"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="3dp"
-                android:background="@drawable/sms_bg"
-                android:text="@string/four"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
+        <Button
+            android:id="@+id/five"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/sms_bg"
+            android:text="@string/_5"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
 
-            <Button
-                android:id="@+id/five"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="3dp"
-                android:background="@drawable/sms_bg"
-                android:text="@string/_5"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
+        <Button
+            android:id="@+id/six"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/sms_bg"
+            android:text="@string/_6"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
 
-            <Button
-                android:id="@+id/six"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="3dp"
-                android:background="@drawable/sms_bg"
-                android:text="@string/_6"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
+        <Button
+            android:id="@+id/seven"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/sms_bg"
+            android:text="@string/seven"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
 
-            <Button
-                android:id="@+id/seven"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="3dp"
-                android:background="@drawable/sms_bg"
-                android:text="@string/seven"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
+        <Button
+            android:id="@+id/eight"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/sms_bg"
+            android:text="@string/eight"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
 
-            <Button
-                android:id="@+id/eight"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="3dp"
-                android:background="@drawable/sms_bg"
-                android:text="@string/eight"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
+        <Button
+            android:id="@+id/nine"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/sms_bg"
+            android:text="@string/nine"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
 
-            <Button
-                android:id="@+id/nine"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="3dp"
-                android:background="@drawable/sms_bg"
-                android:text="@string/nine"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
+        <Button
+            android:id="@+id/ast"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/sms_bg"
+            android:text="@string/ast"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
 
-            <Button
-                android:id="@+id/ast"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="3dp"
-                android:background="@drawable/sms_bg"
-                android:text="@string/ast"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
+        <Button
+            android:id="@+id/zero"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/sms_bg"
+            android:text="@string/_0"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
 
-            <Button
-                android:id="@+id/zero"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="3dp"
-                android:background="@drawable/sms_bg"
-                android:text="@string/_0"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
-
-            <Button
-                android:id="@+id/hash"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_rowWeight="1"
-                android:layout_columnWeight="1"
-                android:layout_margin="3dp"
-                android:background="@drawable/sms_bg"
-                android:text="@string/hash"
-                android:textColor="@color/white"
-                android:textSize="40sp" />
-        </GridLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</LinearLayout>
+        <Button
+            android:id="@+id/hash"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="3dp"
+            android:background="@drawable/sms_bg"
+            android:text="@string/hash"
+            android:textColor="@color/white"
+            android:textSize="40sp" />
+    </GridLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

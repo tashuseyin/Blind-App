@@ -46,4 +46,19 @@
     <string name="object_detection_login">Nesne tespiti özelliğine tıkladınız, giriş yapmak için çift tıklayınız</string>
     <string name="battery_charging_information">pil seviyeniz yüzde %1$s ve cihazınız şarj oluyor</string>
     <string name="battery_not_charging_information">pil seviyeniz yüzde %1$s ve cihazınız şarj olmuyor</string>
+    <string name="user_call_speak">%1$s adlı kişiye tıkladınız, aramak istiyorsanız çift tıklayın</string>
+    <string name="call_user">%1$s aranıyor</string>
+    <string name="call_options">Call Options</string>
+    <string name="tap_once_read_number">Tap Once: Read number</string>
+    <string name="tap_twice_call_number">Tap Twice: Call Number</string>
+    <string name="tap_thrice_cancel">Tap Thrice: Cancel</string>
+    <string name="title_activity_options">OptionsActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
