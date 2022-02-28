@@ -33,6 +33,7 @@ class DialPadFragment : BindingFragment<FragmentDialPadBinding>() {
     private lateinit var adapter: ContactAdapter
     private var listSearch: ArrayList<ContactUser> = arrayListOf()
 
+
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = FragmentDialPadBinding::inflate
 
@@ -53,34 +54,91 @@ class DialPadFragment : BindingFragment<FragmentDialPadBinding>() {
         binding.recyclerView.adapter = adapter
     }
 
-    private fun checkUser(number: String): String {
-        var username = ""
-        sharedViewModel.contactList?.observe(viewLifecycleOwner) { userList ->
-            for (i in userList) {
-                if (number == i.phone_number) {
-                    username = i.user_title
-                    break
-                }
+    private fun setLongListener() {
+        binding.apply {
+            one.setOnLongClickListener {
+                viewDialog()
+                true
+            }
+            two.setOnLongClickListener {
+                viewDialog()
+                true
+            }
+            three.setOnLongClickListener {
+                viewDialog()
+                true
+            }
+            four.setOnLongClickListener {
+                viewDialog()
+                true
+            }
+            five.setOnLongClickListener {
+                viewDialog()
+                true
+            }
+            six.setOnLongClickListener {
+                viewDialog()
+                true
+            }
+            seven.setOnLongClickListener {
+                viewDialog()
+                true
+            }
+            eight.setOnLongClickListener {
+                viewDialog()
+                true
+            }
+            nine.setOnLongClickListener {
+                viewDialog()
+                true
+            }
+            ast.setOnLongClickListener {
+                viewDialog()
+                true
+            }
+            zero.setOnLongClickListener {
+                viewDialog()
+                true
+            }
+            hash.setOnLongClickListener {
+                viewDialog()
+                true
+            }
+            gridLayout.setOnLongClickListener {
+                viewDialog()
+                true
+            }
+            number.setOnLongClickListener {
+                viewDialog()
+                true
             }
         }
-        return username
     }
 
-
-    private fun viewDialog(number: String) {
+    private fun viewDialog() {
         val dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.call_options_dialog)
         dialog.show()
         val screen = dialog.findViewById<ConstraintLayout>(R.id.dialog_screen)
-        val username = checkUser(number)
+
+        var number = binding.number.text.toString()
+        sharedViewModel.contactList?.observe(viewLifecycleOwner) { userList ->
+            for (i in userList) {
+                if (number == i.phone_number) {
+                    number = i.user_title
+                    break
+                }
+            }
+        }
+
         screen.setOnClickListener(TripleClick(object : TripleClickListener {
             override fun onSingleClick(view: View) {
                 Utils.textToSpeechFunctionBasic(requireActivity(), number)
             }
 
             override fun onDoubleClick(view: View) {
-                if (username.isNotEmpty()) {
-                    Utils.textToSpeechFunctionBasic(requireActivity(), "$username aranıyor.")
+                if (number.isNotEmpty()) {
+                    Utils.textToSpeechFunctionBasic(requireActivity(), "$number aranıyor.")
                 } else {
                     Utils.textToSpeechFunctionBasic(requireActivity(), "aranıyor.")
                 }
@@ -97,68 +155,6 @@ class DialPadFragment : BindingFragment<FragmentDialPadBinding>() {
                 dialog.dismiss()
             }
         }))
-    }
-
-    private fun setLongListener() {
-        val numberPhone = binding.number.text.toString()
-        binding.apply {
-            one.setOnLongClickListener {
-                viewDialog(numberPhone)
-                true
-            }
-            two.setOnLongClickListener {
-                viewDialog(numberPhone)
-                true
-            }
-            three.setOnLongClickListener {
-                viewDialog(numberPhone)
-                true
-            }
-            four.setOnLongClickListener {
-                viewDialog(numberPhone)
-                true
-            }
-            five.setOnLongClickListener {
-                viewDialog(numberPhone)
-                true
-            }
-            six.setOnLongClickListener {
-                viewDialog(numberPhone)
-                true
-            }
-            seven.setOnLongClickListener {
-                viewDialog(numberPhone)
-                true
-            }
-            eight.setOnLongClickListener {
-                viewDialog(numberPhone)
-                true
-            }
-            nine.setOnLongClickListener {
-                viewDialog(numberPhone)
-                true
-            }
-            ast.setOnLongClickListener {
-                viewDialog(numberPhone)
-                true
-            }
-            zero.setOnLongClickListener {
-                viewDialog(numberPhone)
-                true
-            }
-            hash.setOnLongClickListener {
-                viewDialog(numberPhone)
-                true
-            }
-            gridLayout.setOnLongClickListener {
-                viewDialog(numberPhone)
-                true
-            }
-            number.setOnLongClickListener {
-                viewDialog(numberPhone)
-                true
-            }
-        }
     }
 
     private fun setListener() {
