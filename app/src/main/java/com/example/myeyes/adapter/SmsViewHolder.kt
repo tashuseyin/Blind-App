@@ -4,8 +4,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myeyes.databinding.SmsCardviewBinding
 import com.example.myeyes.model.Sms
 import com.example.myeyes.util.Utils
-import java.text.SimpleDateFormat
-import java.util.*
 
 class SmsViewHolder(private val binding: SmsCardviewBinding) :
     RecyclerView.ViewHolder(binding.root) {

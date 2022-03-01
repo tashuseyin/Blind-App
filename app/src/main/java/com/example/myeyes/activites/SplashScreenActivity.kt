@@ -7,7 +7,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.myeyes.R
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.*
 
 class SplashScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

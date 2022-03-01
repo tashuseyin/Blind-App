@@ -31,11 +31,10 @@ class ContactFragment : BindingFragment<FragmentInboxContactSentBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ContactAdapter(requireContext()) { user, clickNumber ->
+        adapter = ContactAdapter(requireContext()) { user, clickNumber, _ ->
             when (clickNumber) {
                 1 -> speakCall(user)
                 2 -> callUser(user)
-                3 -> null
             }
         }
         binding.recyclerview.adapter = adapter

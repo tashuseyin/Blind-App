@@ -9,7 +9,7 @@ import com.example.myeyes.model.Sms
 class SmsAdapter(private val onItemClickListener: (Sms) -> Unit) :
     RecyclerView.Adapter<SmsViewHolder>() {
 
-    var dataList = ArrayList<Sms>()
+    private var dataList = ArrayList<Sms>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SmsViewHolder {
         val binding = SmsCardviewBinding.inflate(LayoutInflater.from(parent.context), parent, false)

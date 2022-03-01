@@ -34,5 +34,19 @@
         android:id="@+id/mainMessageFragment"
         android:name="com.example.myeyes.fragment.MainMessageFragment"
         android:label="fragment_main_message"
-        tools:layout="@layout/fragment_main_message" />
+        tools:layout="@layout/fragment_main_message" >
+        <action
+            android:id="@+id/action_mainMessageFragment_to_newMessageFragment"
+            app:destination="@id/newMessageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newMessageFragment"
+        android:name="com.example.myeyes.fragment.NewMessageFragment"
+        android:label="fragment_new_message"
+        tools:layout="@layout/fragment_new_message" >
+        <argument
+            android:name="user"
+            app:argType="com.example.myeyes.model.ContactUser"
+            app:nullable="true" />
+    </fragment>
 </navigation>

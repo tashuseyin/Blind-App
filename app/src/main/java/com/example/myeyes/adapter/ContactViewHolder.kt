@@ -7,8 +7,8 @@ import android.os.Build
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myeyes.R
-import com.example.myeyes.config.TripleClick
-import com.example.myeyes.config.TripleClickListener
+import com.example.myeyes.config.DoubleClick
+import com.example.myeyes.config.DoubleClickListener
 import com.example.myeyes.databinding.ContactsCardviewBinding
 import com.example.myeyes.model.ContactUser
 
@@ -18,7 +18,7 @@ class ContactViewHolder(private val binding: ContactsCardviewBinding) :
     fun bind(
         context: Context,
         user: ContactUser,
-        onItemClickListener: (ContactUser, Int) -> Unit
+        onItemClickListener: (ContactUser, Int, Boolean) -> Unit
     ) {
         binding.userTitle.text = user.user_title
         binding.phoneNumber.text = user.phone_number
@@ -40,20 +40,19 @@ class ContactViewHolder(private val binding: ContactsCardviewBinding) :
         binding.avatarText.background = drawable
 
 
-        binding.click.setOnClickListener(TripleClick(object : TripleClickListener {
+        binding.click.setOnClickListener(DoubleClick(object : DoubleClickListener {
             override fun onSingleClick(view: View) {
-                onItemClickListener(user, 1)
+                onItemClickListener(user, 1, false)
             }
 
             override fun onDoubleClick(view: View) {
-                onItemClickListener(user, 2)
-            }
-
-            override fun onTripleClick(view: View) {
-                onItemClickListener(user, 3)
+                onItemClickListener(user, 2, false)
             }
         }))
+
+        binding.click.setOnLongClickListener {
+            onItemClickListener(user, 0, true)
+            true
+        }
     }
-
-
 }

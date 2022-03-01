@@ -13,10 +13,10 @@
         android:id="@+id/phone_number"
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:background="@drawable/dial_bg"
         android:hint="@string/to"
         android:inputType="number"
         android:padding="5dp"
-        android:background="@drawable/dial_bg"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,15 +26,14 @@
         android:id="@+id/message_text"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:background="@drawable/dial_bg"
         android:gravity="left"
         android:hint="@string/message"
         android:padding="5dp"
-        android:background="@drawable/dial_bg"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phone_number" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

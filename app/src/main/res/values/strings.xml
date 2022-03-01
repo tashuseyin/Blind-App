@@ -13,8 +13,11 @@
     <string name="message">Message</string>
     <string name="device_power">cihazınız sarj oluyor</string>
     <string name="device_not_power">cihazınız sarj olmuyor</string>
-    <string name="message_listen_click">Mesajları dinlemek için mesaja tıklayınız</string>
-    <string name="inbox_start_text">gelen kutusu boş, gönderilen mesajı görmek için sola kaydırabilirsiniz</string>
+    <string name="message_listen_inbox">Gelen kutusu, mesajları dinlemek için mesaja tıklayınız</string>
+    <string name="message_listen_outbox">Gönderilen kutusu, mesajları dinlemek için mesaja tıklayınız</string>
+    <string name="inbox_start_text">gelen mesaj kutusu boş, gönderilen mesajı görmek için sola kaydırabilirsiniz</string>
+    <string name="outbox_start_text">gönderilen mesaj kutusu boş, yeni mesaj göndermek için sola kaydırabilirsiniz</string>
+    <string name="message_start_text">Mesaj göndermek istediğiniz kişiyi seçin, rehberde var olmayan birine mesaj yollamak istiyorsanız ekrana uzunca basın veya sağ alttaki butona tıklayın.</string>
     <string name="device_charching">ve cihazınız şarj oluyor</string>
     <string name="device_not_charching">ve cihazınınz sarj olmuyor</string>
     <string name="backspace">backspace</string>
@@ -47,6 +50,7 @@
     <string name="battery_charging_information">pil seviyeniz yüzde %1$s ve cihazınız şarj oluyor</string>
     <string name="battery_not_charging_information">pil seviyeniz yüzde %1$s ve cihazınız şarj olmuyor</string>
     <string name="user_call_speak">%1$s adlı kişiye tıkladınız, aramak istiyorsanız çift tıklayın</string>
+    <string name="user_message_speak">%1$s adlı kişiye tıkladınız, mesaj atmak için çift tıklayınız</string>
     <string name="call_user">%1$s aranıyor</string>
     <string name="call_options">Call Options</string>
     <string name="tap_once_read_number">Tap Once: Read number</string>
@@ -58,7 +62,11 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+    <string name="calling">aranıyor</string>
+    <string name="calling_user">%1$s aranıyor</string>
+    <string name="phone_number_empty">Telefon numarası boş</string>
+    <string name="phone_number_deleted">Telefon numarası tamamen silindi</string>
+    <string name="digit_deleted">%1$s silindi</string>
+    <string name="new_message_fab_message">Yeni mesaj butonuna tıkladınız, onaylamak için çift tıklayınız.</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>

@@ -1,6 +1,5 @@
 package com.example.myeyes.fragment
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +16,6 @@ class MainCallFragment : BindingFragment<FragmentMainCallBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val adapter = CallViewPagerAdapter(requireActivity().supportFragmentManager, lifecycle)
         binding.viewpager.adapter = adapter
 

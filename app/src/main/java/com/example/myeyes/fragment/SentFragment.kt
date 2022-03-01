@@ -42,12 +42,12 @@ class SentFragment : BindingFragment<FragmentInboxContactSentBinding>() {
                 if (it) {
                     Utils.textToSpeechFunctionBasic(
                         requireActivity(),
-                        getString(R.string.inbox_start_text)
+                        getString(R.string.outbox_start_text)
                     )
                 } else {
                     Utils.textToSpeechFunctionBasic(
                         requireActivity(),
-                        getString(R.string.message_listen_click)
+                        getString(R.string.message_listen_outbox)
                     )
                 }
             }

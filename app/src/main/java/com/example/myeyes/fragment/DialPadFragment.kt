@@ -44,11 +44,10 @@ class DialPadFragment : BindingFragment<FragmentDialPadBinding>() {
         setListener()
         setLongListener()
         searchEditTextNumber()
-        adapter = ContactAdapter(requireContext()) { user, clickNumber ->
+        adapter = ContactAdapter(requireContext()) { user, clickNumber, _ ->
             when (clickNumber) {
                 1 -> speakCall(user)
                 2 -> callUser(user)
-                3 -> null
             }
         }
         binding.recyclerView.adapter = adapter
@@ -119,13 +118,15 @@ class DialPadFragment : BindingFragment<FragmentDialPadBinding>() {
         val dialog = Dialog(requireContext())
         dialog.setContentView(R.layout.call_options_dialog)
         dialog.show()
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
         val screen = dialog.findViewById<ConstraintLayout>(R.id.dialog_screen)
-
-        var number = binding.number.text.toString()
+        val number = binding.number.text.toString()
+        var username = ""
         sharedViewModel.contactList?.observe(viewLifecycleOwner) { userList ->
             for (i in userList) {
                 if (number == i.phone_number) {
-                    number = i.user_title
+                    username = i.user_title
                     break
                 }
             }
@@ -133,14 +134,21 @@ class DialPadFragment : BindingFragment<FragmentDialPadBinding>() {
 
         screen.setOnClickListener(TripleClick(object : TripleClickListener {
             override fun onSingleClick(view: View) {
-                Utils.textToSpeechFunctionBasic(requireActivity(), number)
+                if (username.isNotEmpty()) {
+                    Utils.textToSpeechFunctionBasic(requireActivity(), username)
+                } else {
+                    Utils.textToSpeechFunctionBasic(requireActivity(), number)
+                }
             }
 
             override fun onDoubleClick(view: View) {
-                if (number.isNotEmpty()) {
-                    Utils.textToSpeechFunctionBasic(requireActivity(), "$number aranıyor.")
+                if (username.isNotEmpty()) {
+                    Utils.textToSpeechFunctionBasic(
+                        requireActivity(),
+                        getString(R.string.call_user, username)
+                    )
                 } else {
-                    Utils.textToSpeechFunctionBasic(requireActivity(), "aranıyor.")
+                    Utils.textToSpeechFunctionBasic(requireActivity(), getString(R.string.calling))
                 }
                 lifecycleScope.launch {
                     delay(2000)
@@ -208,11 +216,17 @@ class DialPadFragment : BindingFragment<FragmentDialPadBinding>() {
                 displayNumber("#")
             }
             backButton.setOnClickListener {
-                Utils.textToSpeechFunctionBasic(requireActivity(), "${number.text.last()} silindi.")
+                Utils.textToSpeechFunctionBasic(
+                    requireActivity(),
+                    getString(R.string.digit_deleted, number.text.last())
+                )
 
                 if (number.length() == 1) {
                     number.text = null
-                    Utils.textToSpeechFunctionBasic(requireActivity(), "Telefon numarası boş")
+                    Utils.textToSpeechFunctionBasic(
+                        requireActivity(),
+                        getString(R.string.phone_number_empty)
+                    )
                     listSearch.clear()
                     adapter.addItems(listSearch)
                 } else {
@@ -224,7 +238,7 @@ class DialPadFragment : BindingFragment<FragmentDialPadBinding>() {
                 number.text = null
                 Utils.textToSpeechFunctionBasic(
                     requireActivity(),
-                    "Telefon numarası tamamen silindi"
+                    getString(R.string.phone_number_deleted)
                 )
                 true
             }

@@ -2,7 +2,6 @@ package com.example.myeyes.fragment
 
 import android.content.Intent
 import android.content.IntentFilter
-import android.graphics.Color
 import android.os.BatteryManager
 import android.os.Bundle
 import android.view.LayoutInflater

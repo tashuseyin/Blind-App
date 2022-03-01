@@ -48,7 +48,7 @@ class Inbox : BindingFragment<FragmentInboxContactSentBinding>() {
                 } else {
                     textToSpeechFunctionBasic(
                         requireActivity(),
-                        getString(R.string.message_listen_click)
+                        getString(R.string.message_listen_inbox)
                     )
                 }
             }

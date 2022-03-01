@@ -16,7 +16,6 @@ class MainMessageFragment : BindingFragment<FragmentMainMessageBinding>() {
     override val bindingInflater: (LayoutInflater) -> ViewBinding
         get() = FragmentMainMessageBinding::inflate
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = SmsViewPagerAdapter(requireActivity().supportFragmentManager, lifecycle)
@@ -34,7 +33,6 @@ class MainMessageFragment : BindingFragment<FragmentMainMessageBinding>() {
                 }
             }
         }.attach()
-
     }
 
     override fun onDestroyView() {

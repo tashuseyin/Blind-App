@@ -2,7 +2,6 @@ package com.example.myeyes.activites
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
 import com.example.myeyes.R
 import com.example.myeyes.app.MyApp
 import com.example.myeyes.databinding.ActivityMainBinding

@@ -38,7 +38,6 @@ class SharedViewModel(application: Application) :
     private var _sentSmsList: MutableLiveData<ArrayList<Sms>> = MutableLiveData(sentSmsDataList)
     val sentSmsList = _sentSmsList
 
-
     fun loadSms() {
         smsDataList.clear()
         isRefresh.value = false
@@ -127,7 +126,7 @@ class SharedViewModel(application: Application) :
                     if (phone.isNotBlank()) {
                         contactDataList.add(ContactUser(id, name, phone))
                         viewModelScope.launch {
-                            insert(ContactUser(id, name, phone.replace(" ","")))
+                            insert(ContactUser(id, name, phone.replace(" ", "")))
                         }
                     }
                 } while (c.moveToNext())
