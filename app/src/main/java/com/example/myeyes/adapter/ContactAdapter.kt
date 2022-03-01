@@ -9,10 +9,10 @@ import com.example.myeyes.model.ContactUser
 
 class ContactAdapter(
     private val context: Context,
-    private val onItemClickListener: (ContactUser, Int) -> Unit
+    private val onItemClickListener: (ContactUser, Int, Boolean) -> Unit
 ) : RecyclerView.Adapter<ContactViewHolder>() {
 
-    var contactList: List<ContactUser> = emptyList()
+    private var contactList: List<ContactUser> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
         val binding =
