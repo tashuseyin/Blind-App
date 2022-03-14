@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.4235897435897436" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/backspace.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/battery_20.xml" value="0.403125" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/drawable-v24/battery_60.xml" value="0.12552083333333333" />
@@ -54,6 +55,14 @@
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/fragment_sent.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/shimmer_row.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/monster/AndroidStudioProjects/MyEyes/app/src/main/res/layout/sms_cardview.xml" value="0.38697916666666665" />
+        <entry key="app/src/main/res/drawable/bottom_sheet_bg.xml" value="0.41333333333333333" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add.xml" value="0.41333333333333333" />
+        <entry key="app/src/main/res/drawable/ic_baseline_remove.xml" value="0.41333333333333333" />
+        <entry key="app/src/main/res/drawable/rectangle.xml" value="0.41333333333333333" />
+        <entry key="app/src/main/res/layout/activity_object_detection.xml" value="0.38958333333333334" />
+        <entry key="app/src/main/res/layout/fragment_camera_connection.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/fragment_legacy_camera_connection.xml" value="0.38958333333333334" />
+        <entry key="app/src/main/res/layout/layout_bottom_sheet.xml" value="0.4036458333333333" />
       </map>
     </option>
   </component>

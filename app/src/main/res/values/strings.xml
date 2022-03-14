@@ -68,5 +68,6 @@
     <string name="phone_number_deleted">Telefon numarası tamamen silindi</string>
     <string name="digit_deleted">%1$s silindi</string>
     <string name="new_message_fab_message">Yeni mesaj butonuna tıkladınız, onaylamak için çift tıklayınız.</string>
+    <string name="camera_error">Error Opening Camera</string>
 
 </resources>

@@ -1,17 +1,20 @@
 package com.example.myeyes.fragment
 
 import android.Manifest
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.example.myeyes.R
+import com.example.myeyes.activites.MainActivity
 import com.example.myeyes.app.MyApp
 import com.example.myeyes.bindingadapter.BindingFragment
 import com.example.myeyes.config.DoubleClick
 import com.example.myeyes.config.DoubleClickListener
 import com.example.myeyes.databinding.FragmentMainBinding
+import com.example.myeyes.object_detection.DetectorActivity
 import com.example.myeyes.util.Utils
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -31,6 +34,20 @@ class MainFragment : BindingFragment<FragmentMainBinding>() {
 
     private fun setListener() {
         binding.apply {
+            objectDetection.setOnClickListener(DoubleClick(object : DoubleClickListener{
+                override fun onSingleClick(view: View) {
+                    Utils.textToSpeechFunctionBasic(
+                        requireActivity(),
+                        "Nesne aq"
+                    )
+                }
+
+                override fun onDoubleClick(view: View) {
+                    val intent = Intent(activity , DetectorActivity::class.java)
+                    startActivity(intent)
+                }
+
+            }))
             battery.setOnClickListener(DoubleClick(object : DoubleClickListener {
                 override fun onSingleClick(view: View) {
                     Utils.textToSpeechFunctionBasic(

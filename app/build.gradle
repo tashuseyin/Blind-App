@@ -16,6 +16,7 @@ android {
         versionCode 1
         versionName "1.0"
 
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -78,4 +79,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt 'androidx.room:room-compiler:2.4.2'
     implementation 'androidx.room:room-ktx:2.4.2'
+
+    implementation 'com.google.firebase:firebase-ml-vision:15.0.0'
+    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
 }
