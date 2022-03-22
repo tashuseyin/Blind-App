@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".app.MyApp"
@@ -17,10 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/SplashScreen">
         <activity
-            android:name=".activites.ObjectDetectionActivity"
-            android:exported="false"
+            android:name=".activites.DetectorActivity"
+            android:exported="true"
             android:theme="@style/Theme.MyEyes" />
-        <activity android:name=".object_detection.DetectorActivity"/>
         <activity
             android:name=".activites.MainActivity"
             android:exported="true"

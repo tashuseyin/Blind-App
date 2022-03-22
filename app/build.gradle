@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.myeyes"
-        minSdk 19
+        minSdk 21
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -80,6 +80,11 @@ dependencies {
     kapt 'androidx.room:room-compiler:2.4.2'
     implementation 'androidx.room:room-ktx:2.4.2'
 
-    implementation 'com.google.firebase:firebase-ml-vision:15.0.0'
-    implementation 'org.tensorflow:tensorflow-lite:0.0.0-nightly'
+    // Tensorflow
+    implementation 'org.tensorflow:tensorflow-android:1.13.1'
+    // TfLite
+    implementation 'org.tensorflow:tensorflow-lite:2.8.0'
+
+    // Task
+    implementation 'com.google.android.gms:play-services-tasks:18.0.1'
 }

@@ -8,7 +8,6 @@ import android.os.Trace;
 
 import org.tensorflow.lite.Interpreter;
 
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -43,7 +42,8 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
 
     private Interpreter tfLite;
 
-    private TFLiteObjectDetectionAPIModel() {}
+    private TFLiteObjectDetectionAPIModel() {
+    }
 
     private static MappedByteBuffer loadModelFile(AssetManager assets, String modelFilename)
             throws IOException {
@@ -64,10 +64,10 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
             throws IOException {
         final TFLiteObjectDetectionAPIModel d = new TFLiteObjectDetectionAPIModel();
 
-        InputStream labelsInput = null;
+        InputStream labelsInput;
         String actualFilename = labelFilename.split("file:///android_asset/")[1];
         labelsInput = assetManager.open(actualFilename);
-        BufferedReader br = null;
+        BufferedReader br;
         br = new BufferedReader(new InputStreamReader(labelsInput));
         String line;
         while ((line = br.readLine()) != null) {
@@ -91,11 +91,11 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
         } else {
             numBytesPerChannel = 4; // Floating point
         }
-        d.imgData = ByteBuffer.allocateDirect(1 * d.inputSize * d.inputSize * 3 * numBytesPerChannel);
+        d.imgData = ByteBuffer.allocateDirect(d.inputSize * d.inputSize * 3 * numBytesPerChannel);
         d.imgData.order(ByteOrder.nativeOrder());
         d.intValues = new int[d.inputSize * d.inputSize];
 
-        d.tfLite.setNumThreads(NUM_THREADS);
+
         d.outputLocations = new float[1][NUM_DETECTIONS][4];
         d.outputClasses = new float[1][NUM_DETECTIONS];
         d.outputScores = new float[1][NUM_DETECTIONS];
@@ -176,7 +176,8 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
     }
 
     @Override
-    public void enableStatLogging(final boolean logStats) {}
+    public void enableStatLogging(final boolean logStats) {
+    }
 
     @Override
     public String getStatString() {
@@ -184,14 +185,14 @@ public class TFLiteObjectDetectionAPIModel implements Classifier {
     }
 
     @Override
-    public void close() {}
-
-    public void setNumThreads(int num_threads) {
-        if (tfLite != null) tfLite.setNumThreads(num_threads);
+    public void close() {
     }
 
-    @Override
+    public void setNumThreads(int num_threads) {
+        if (tfLite != null) setNumThreads(num_threads);
+    }
+
     public void setUseNNAPI(boolean isChecked) {
-        if (tfLite != null) tfLite.setUseNNAPI(isChecked);
+        if (tfLite != null) setUseNNAPI(isChecked);
     }
 }
