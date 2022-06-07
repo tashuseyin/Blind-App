@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.RectF;
+import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
@@ -18,6 +20,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Trace;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
 import android.view.WindowManager;
@@ -26,6 +29,7 @@ import android.widget.Toast;
 import com.example.myeyes.R;
 import com.example.myeyes.object_detection.env.ImageUtils;
 import com.example.myeyes.object_detection.env.Logger;
+import com.example.myeyes.util.Utils;
 
 import java.nio.ByteBuffer;
 import java.util.Collections;
@@ -41,6 +45,8 @@ public abstract class CameraActivity extends Activity
 
     private static final String PERMISSION_CAMERA = Manifest.permission.CAMERA;
     private static final String PERMISSION_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE;
+    static final int AVERAGE_EYE_DISTANCE = 63;
+
 
     private Handler handler;
     private HandlerThread handlerThread;
@@ -73,9 +79,9 @@ public abstract class CameraActivity extends Activity
 
         this.textToSpeech = new TextToSpeech(this, status -> {
             if (status == TextToSpeech.SUCCESS) {
-                LOGGER.i("onCreate", "TextToSpeech is initialised");
+                LOGGER.i("onCreate", "Text to speech tanımlandı");
             } else {
-                LOGGER.e("onCreate", "Cannot initialise text to speech!");
+                LOGGER.e("onCreate", "text to speech tanımlanamadı!");
             }
         });
 
@@ -382,7 +388,7 @@ public abstract class CameraActivity extends Activity
 
         final double rightStart = previewWidth / 2 - 0.10 * previewWidth;
         final double rightFinish = previewWidth;
-        final double letStart = 0;
+        final double leftStart = 0;
         final double leftFinish = previewWidth / 2 + 0.10 * previewWidth;
         final double previewArea = previewWidth * previewHeight;
 
@@ -392,31 +398,32 @@ public abstract class CameraActivity extends Activity
             Classifier.Recognition recognition = currentRecognitions.get(i);
             stringBuilder.append(recognition.getTitle());
 
+            RectF imageLocation = recognition.getLocation();
             float start = recognition.getLocation().top;
             float end = recognition.getLocation().bottom;
             double objArea = recognition.getLocation().width() * recognition.getLocation().height();
 
             if (objArea > previewArea / 2) {
-                stringBuilder.append(" in front of you ");
+                stringBuilder.append(" önünde ");
             } else {
 
 
-                if (start > letStart && end < leftFinish) {
-                    stringBuilder.append(" on the left ");
+                if (start > leftStart && end < leftFinish) {
+                    stringBuilder.append(" sağda ");
                 } else if (start > rightStart && end < rightFinish) {
-                    stringBuilder.append(" on the right ");
+                    stringBuilder.append(" solda ");
                 } else {
-                    stringBuilder.append(" in front of you ");
+                    stringBuilder.append(" önünde ");
                 }
             }
 
             if (i + 1 < currentRecognitions.size()) {
-                stringBuilder.append(" and ");
+                stringBuilder.append(" ve ");
             }
         }
-        stringBuilder.append(" detected.");
+        stringBuilder.append(" bulundu.");
 
-        textToSpeech.speak(stringBuilder.toString(), TextToSpeech.QUEUE_FLUSH, null);
+        Utils.INSTANCE.textToSpeechFunctionMain(this, stringBuilder.toString());
     }
 
     protected abstract void processImage();
